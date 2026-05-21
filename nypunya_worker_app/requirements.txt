@@ -1,3 +1,0 @@
-Django>=5.0,<6
-mysqlclient>=2.0
-textblob>=0.17.0
