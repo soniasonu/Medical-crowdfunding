@@ -1,0 +1,12 @@
+{% extends "base_dashboard.html" %}
+
+{% block sidebar %}
+<span class="nav-section-label">Navigation</span>
+<a href="{% url 'dashboard' %}" class="nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i class="fas fa-house"></i> Overview</a>
+<a href="{% url 'agency_view_workers' %}" class="nav-item {% if request.resolver_match.url_name == 'agency_view_workers' %}active{% endif %}"><i class="fas fa-users"></i> Worker Requests</a>
+<a href="{% url 'agency_view_jobs' %}" class="nav-item {% if request.resolver_match.url_name == 'agency_view_jobs' %}active{% endif %}"><i class="fas fa-briefcase"></i> Job Requests</a>
+<a href="{% url 'agency_manage_work' %}" class="nav-item {% if request.resolver_match.url_name == 'agency_manage_work' %}active{% endif %}"><i class="fas fa-th-large"></i> My Services</a>
+<a href="{% url 'agency_manage_availability' %}" class="nav-item {% if request.resolver_match.url_name == 'agency_manage_availability' %}active{% endif %}"><i class="fas fa-calendar-alt"></i> Scheduling</a>
+<a href="{% url 'agency_view_assignments' %}" class="nav-item {% if request.resolver_match.url_name == 'agency_view_assignments' %}active{% endif %}"><i class="fas fa-clipboard-check"></i> Assignments</a>
+<a href="{% url 'agency_profile' %}" class="nav-item {% if request.resolver_match.url_name == 'agency_profile' %}active{% endif %}"><i class="fas fa-building-user"></i> My Profile</a>
+{% endblock %}

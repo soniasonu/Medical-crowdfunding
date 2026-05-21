@@ -1,0 +1,75 @@
+{% extends "base_admin.html" %}
+{% block title %}Manage Categories – Admin Dashboard{% endblock %}
+{% block page_heading %}<i class="fas fa-tags"></i> Work Categories{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h3>Add New Category</h3>
+  </div>
+  <form method="post" action="{% url 'admin_category_add' %}">
+    {% csrf_token %}
+    <div class="form-row" style="align-items:flex-end;">
+      <div class="form-group">
+        <label>Category Name</label>
+        <input type="text" name="name" placeholder="e.g. Plumbing, Electrical…" required>
+      </div>
+      <div class="form-group" style="justify-content:flex-end;">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Category</button>
+      </div>
+    </div>
+  </form>
+  <div class="divider"></div>
+  <div class="card-header">
+    <h3><i class="fas fa-clock"></i> Pending Proposals</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Category Name</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for c in categories_pending %}
+        <tr>
+          <td>{{ c.category_id }}</td>
+          <td>{{ c.name }}</td>
+          <td>
+            <a href="{% url 'admin_category_approve' c.category_id %}" class="btn btn-success btn-sm">
+              <i class="fas fa-check"></i> Approve
+            </a>
+            <a href="{% url 'admin_category_reject' c.category_id %}" class="btn btn-danger btn-sm" style="margin-left:6px;" onclick="return confirm('Reject this proposal?');">
+              <i class="fas fa-times"></i> Reject
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3" class="td-empty">No pending category proposals.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+  <div class="card-header">
+    <h3><i class="fas fa-check-circle"></i> Active Categories</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Category Name</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for c in categories_approved %}
+        <tr>
+          <td>{{ c.category_id }}</td>
+          <td>{{ c.name }}</td>
+          <td>
+            <a href="{% url 'admin_category_delete' c.category_id %}" class="btn btn-danger btn-sm" onclick="return confirm('Delete this category?');">
+              <i class="fas fa-trash-alt"></i> Delete
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3" class="td-empty"><i class="fas fa-inbox"></i> No active categories yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

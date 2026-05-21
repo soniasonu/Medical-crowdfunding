@@ -1,0 +1,53 @@
+{% extends "base_worker.html" %}
+{% block title %}Assigned Work – Worker Dashboard{% endblock %}
+{% block page_heading %}Assigned Work{% endblock %}
+
+{% block content %}
+<div class="card" style="margin-top:20px;">
+  <div class="card-header">
+    <h3><i class="fas fa-clipboard-list"></i> Assigned Jobs</h3>
+  </div>
+  {% if assignments %}
+  <div class="work-cards">
+    {% for a in assignments %}
+    <div class="work-card">
+      <div class="wc-id">Job #{{ a.request_work_id }} &nbsp;·&nbsp; Assign #{{ a.assign_id }}</div>
+      <div style="margin:10px 0; padding:12px; background:rgba(0,0,0,0.03); border-radius:8px; border-left:4px solid #6366f1;">
+        <div style="font-weight:600; color:#1e293b; margin-bottom:4px;">
+          <i class="fas fa-user-circle" style="color:#6366f1"></i> {{ a.customer_name }}
+        </div>
+        <div style="font-size:0.9em; color:#64748b;">
+          <i class="fas fa-phone-alt"></i> {{ a.customer_phone }}
+        </div>
+      </div>
+      <div class="wc-desc">{{ a.work_description|default:"No description provided" }}</div>
+      <div class="flex items-center gap-8" style="margin-top:10px;">
+        <span class="wc-date"><i class="fas fa-calendar-alt"></i> {{ a.assign_date }}</span>
+        {% if a.status == 'assigned' %}<span class="badge assigned">Assigned</span>
+        {% elif a.status == 'confirmed' %}<span class="badge confirmed">Confirmed</span>
+        {% elif a.status == 'finished_by_worker' %}<span class="badge" style="background:#dcfce7; color:#166534; border:1px solid #bbf7d0;">Waiting Agency Approval</span>
+        {% else %}<span class="badge">{{ a.status }}</span>{% endif %}
+      </div>
+      
+      {% if a.status == 'confirmed' %}
+      <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #e2e8f0;">
+        <form method="post" action="{% url 'worker_upload_completion_photo' a.request_work_id %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div style="font-size: 11px; font-weight: 700; color: #475569; margin-bottom: 8px; text-transform: uppercase;">Upload Completion Photo</div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <input type="file" name="task_photo" required style="font-size: 11px; flex: 1; border: 1px solid #e2e8f0; padding: 6px; border-radius: 6px; background: #fff;">
+            <button type="submit" class="btn btn-sm" style="background: #10b981; color: #fff; border: none; font-size: 11px; font-weight: 700;">
+              <i class="fas fa-upload"></i> SUBMIT PHOTO
+            </button>
+          </div>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="td-empty" style="padding:40px;"><i class="fas fa-inbox"></i><br>No work assigned yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

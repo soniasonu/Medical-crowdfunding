@@ -1,0 +1,38 @@
+{% extends 'Admin/PageHeader.html' %}
+{% block content %}
+<div class="wrapper row3" style="background: transparent;">
+  <main class="hoc container clear"> 
+    <div class="table-wrapper">
+        <h2 style="color: #333; margin-bottom: 20px;">Collected Amount Report</h2>
+        <table class="premium-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient Name</th>
+                    <th>Hospital</th>
+                    <th>Donor Name</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th style="text-align: center;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in data %}
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td><strong style="color: #4CAF50;">₹ {{ row.4 }}</strong></td>
+                    <td>{{ row.5 }}</td>
+                    <td style="text-align: center;">
+                        <a href="/view_status/{{ row.6 }}" class="btn-sm btn-neutral">View Status</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+{% endblock %}

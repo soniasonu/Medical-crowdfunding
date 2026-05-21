@@ -1,0 +1,49 @@
+{% extends 'Admin/PageHeader.html' %}
+{% block content %}
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="view-container">
+        <h2>Ongoing Funding</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Hospital</th>
+                    <th>Address</th>
+                    <th>Request Date</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Required Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td><strong>{{ row.12 }}</strong></td>
+                    <td>{{ row.13 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.4 }}</td>
+                    <td><div style="max-width: 200px; font-size: 13px;">{{ row.5 }}</div></td>
+                    <td><strong style="color: #059669;">₹ {{ row.10 }}</strong></td>
+                    <td>
+                        <div style="display: flex; gap: 5px;">
+                            <a href="/stop_fund/{{ row.0 }}" class="btn-sm" style="background: #ef4444; color: #fff !important;">⏹ Stop</a>
+                            <a href="/resume_fund/{{ row.0 }}" class="btn-sm" style="background: #10b981; color: #fff !important;">▶ Resume</a>
+                            <a href="/approveadmin/{{ row.0 }}" class="btn-sm" style="background: #64748b; color: #fff !important;">👁 View</a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" style="text-align: center; padding: 40px; color: #64748b; font-style: italic;">No ongoing funding requests.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

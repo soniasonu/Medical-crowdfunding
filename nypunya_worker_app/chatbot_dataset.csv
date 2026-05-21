@@ -1,0 +1,30 @@
+intent,message,response,category_id
+request_electrical,my light is not working,I'll find an electrician for you.,1
+request_electrical,short circuit in kitchen,I'll find an electrician for you.,1
+request_electrical,need to fix a fan,I'll find an electrician for you.,1
+request_plumbing,tap is leaking,I'll find a plumber for you.,2
+request_plumbing,water leakage in bathroom,I'll find a plumber for you.,2
+request_plumbing,flush not working,I'll find a plumber for you.,2
+request_climate,AC is not cooling,I'll find an AC technician.,3
+request_climate,heater is broken,I'll find a technician for your heating system.,3
+request_masonry,floor tiles are broken,I'll find a mason for you.,4
+request_masonry,wall needs repair,I'll find a mason for you.,4
+request_carpentry,door is jammed,I'll find a carpenter for you.,5
+request_carpentry,need a new table fixed,I'll find a carpenter for you.,5
+request_cleaning,room needs cleaning,I'll find a maintenance worker.,6
+request_cleaning,need house sweeping,I'll find a maintenance worker.,6
+greeting,hello,Hi! How can I help you today?,
+greeting,hi,Hello! Looking for a worker?,
+help,what can you do,I can help you find and book workers like plumbers, electricians, and more.,
+bye,thank you,You're welcome! Let me know if you need more help.,
+categories,what services are available?,We offer various services including Plumbing, Electrical works, Cleaning, and Carpentry. Which one are you looking for?,
+request_electrical,I need an electrician,I found some electricians near your location. Here are the top-rated ones:\n- Rajesh (4.5 ★)\n- Sinu (4.2 ★)\nWould you like to see their full profiles?,1
+booking_info,How to book a worker,To book a worker, go to the 'Worker List' page, select your preferred worker, and click the 'Book Now' button. OR I can do it for you! Shall I proceed?,
+best_worker,who is the best worker?,Based on user reviews, Manus from Clean Pro has the highest rating of 4.9 stars. They have successfully completed 50+ works.,
+request_status,check my request status,Checking your recent job requests... Your request for 'Plumbing' is currently PENDING. I will notify you once it's confirmed.,
+best_agency,which is the best agency in kochi,In Kochi, 'Apex Home Services' has the highest rating (4.8/5). They have 20+ verified workers.,
+agency_verification,Is 'Nexgen Agency' verified?,Yes, 'Nexgen Agency' is a verified partner. All their workers have completed background checks.,
+agency_for_service,which agency provides cleaning services?,There are 3 agencies providing cleaning services: CleanPro, Expert care, and Fast Fix.,
+rate_service,I want to rate my last service,Sure! Please rate your experience with Ram from 1 to 5 and type your feedback here. This will be visible on the worker's profile.,
+worker_comparison,who is better among them,Worker Arun from 'Safe Fix' has a 4.8 rating. No complaints. Worker Sinu has a 3.5 rating with one complaint about being late.,
+final_booking,okay I will book Arun,Great choice! Redirecting you to the manual booking page for Arun...,

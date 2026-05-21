@@ -1,0 +1,37 @@
+{% extends 'Hospital/pageheader.html' %}
+{% block content %}
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="view-container">
+        <h2>Donation Records</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Donor Name</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td><strong>{{ row.5 }}</strong></td>
+                    <td>{{ row.2 }}</td>
+                    <td><strong style="color: #f97316;">₹ {{ row.3 }}</strong></td>
+                    <td>{{ row.4 }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 30px; color: #64748b; font-style: italic;">No donation records found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

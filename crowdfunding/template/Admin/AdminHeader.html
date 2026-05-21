@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CrowdFunding — Admin Dashboard</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/static/Admin/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="/static/Admin/layout/styles/custom_ui.css" rel="stylesheet" type="text/css" media="all">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f8fafc;
+    min-height: 100vh;
+    color: #1e293b;
+    margin: 0;
+  }
+  .cf-topbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #475569;
+  }
+  .cf-navbar {
+    background: #4f46e5;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 70px;
+  }
+  .cf-logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+  .cf-logo span {
+    color: rgba(255,255,255,0.8);
+  }
+  .cf-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .cf-nav > li > a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .cf-nav > li > a:hover { 
+    background: rgba(255,255,255,0.15); 
+    color: #fff; 
+  }
+  .btn-logout {
+    background: #ef4444;
+    color: #fff !important;
+    padding: 9px 18px !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    margin-left: 10px;
+  }
+  .btn-logout:hover { 
+    background: #dc2626 !important; 
+  }
+  .page-content { 
+    padding: 40px 20px;
+    min-height: calc(100vh - 120px); 
+  }
+  
+  /* Container style for Normal Visibility */
+  .view-container {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h2 { color: #1e293b; margin-top: 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; }
+  </style>
+</head>
+<body>
+
+<div class="cf-topbar">
+  <div><span>📞 +00 (123) 456 7890</span><span style="margin-left:18px">✉️ info@crowdapp.com</span></div>
+  <div>👨‍💼 Admin Dashboard</div>
+</div>
+
+<nav class="cf-navbar">
+  <a href="/AdminHomePage/" class="cf-logo">CROWD<span>FUNDING</span></a>
+
+  <ul class="cf-nav">
+    <li><a href="/AdminHomePage/">🏠 Home</a></li>
+
+    <li>
+      <a href="/viewAllHospitalRequest">🏥 Hospital Requests</a>
+    </li>
+
+    <li>
+      <a href="/view_admin_approved_request">🩺 View Patients</a>
+    </li>
+
+    <li>
+      <a href="/admin_view_donors">❤️ View Donors</a>
+    </li>
+
+    <li>
+      <a href="/viewamountcollection">💰 Collections</a>
+    </li>
+
+    <li><a href="/logout" class="btn-logout">🚪 Logout</a></li>
+  </ul>
+</nav>
+
+<div class="page-content">
+{% block content %}
+{% endblock %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+{% extends "base_user.html" %}
+{% block title %}User Dashboard – Nypunya Worker{% endblock %}
+{% block page_heading %}User Dashboard Overview{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>Welcome, {{ request.session.user_name }}</h2>
+  <p>Find services, track your requests and share feedback</p>
+</div>
+
+<!-- Stats / Quick Access -->
+<div class="stats-grid">
+  <a href="{% url 'user_view_request_work' %}" class="stat-card" style="text-decoration:none; color:inherit;">
+    <div class="stat-icon purple"><i class="fas fa-tags"></i></div>
+    <span class="value">{{ categories|length }}</span>
+    <span class="label">Work Categories</span>
+    <div class="stat-accent-bar"></div>
+  </a>
+  <a href="{% url 'user_view_request_work' %}" class="stat-card" style="text-decoration:none; color:inherit;">
+    <div class="stat-icon blue"><i class="fas fa-building"></i></div>
+    <span class="value">{{ agencies|length }}</span>
+    <span class="label">Agencies Available</span>
+    <div class="stat-accent-bar" style="background:linear-gradient(90deg,#2563eb,#1d4ed8)"></div>
+  </a>
+  <a href="{% url 'user_view_my_requests' %}" class="stat-card" style="text-decoration:none; color:inherit;">
+    <div class="stat-icon green"><i class="fas fa-list-check"></i></div>
+    <span class="value">{{ my_requests|length }}</span>
+    <span class="label">My Job Requests</span>
+    <div class="stat-accent-bar" style="background:linear-gradient(90deg,#059669,#047857)"></div>
+  </a>
+  <a href="{% url 'user_view_outside_work' %}" class="stat-card" style="text-decoration:none; color:inherit;">
+    <div class="stat-icon cyan"><i class="fas fa-users"></i></div>
+    <span class="value">{{ workers|length }}</span>
+    <span class="label">Available Workers</span>
+    <div class="stat-accent-bar" style="background:linear-gradient(90deg,#0891b2,#0e7490)"></div>
+  </a>
+</div>
+
+<div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;">
+  <!-- Recent Service Requests -->
+  <div class="card">
+    <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+      <h3><i class="fas fa-list-check"></i> Recent Job Requests</h3>
+      <a href="{% url 'user_view_my_requests' %}" class="btn btn-sm">View All</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Agency</th><th>Status</th></tr></thead>
+        <tbody>
+          {% for r in my_requests|slice:":5" %}
+          <tr>
+            <td>{{ r.request_work_id }}</td>
+            <td>{{ r.agency_id }}</td>
+            <td>
+              <span class="badge {% if r.status == 'confirmed' %}approved{% elif r.status == 'pending' %}pending{% else %}quoted{% endif %}">
+                {{ r.status|title }}
+              </span>
+            </td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="3" class="td-empty">No requests.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Recent Direct Hire Activity -->
+  <div class="card">
+    <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+      <h3><i class="fas fa-user-tie"></i> Recent Direct Hires</h3>
+      <a href="{% url 'user_view_outside_work' %}" class="btn btn-sm">View All</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Worker</th><th>Status</th></tr></thead>
+        <tbody>
+          {% for ow in outside_requests|slice:":5" %}
+          <tr>
+            <td>{{ ow.worker_id }}</td>
+            <td>
+              <span class="badge {% if ow.status == 'approved' %}approved{% else %}pending{% endif %}">
+                {{ ow.status|title }}
+              </span>
+            </td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="2" class="td-empty">No direct hires.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 24px;">
+  <div class="card-header">
+    <h3><i class="fas fa-building-circle-check"></i> Verified Service Agencies</h3>
+  </div>
+  <div style="padding: 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
+    {% for a in agencies %}
+    <div style="border: 1px solid #e5e7eb; border-radius: 16px; padding: 20px; text-align: center; transition: all 0.3s; background: #fff; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+      <div style="width: 80px; height: 80px; border-radius: 50%; background: #f9fafb; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; border: 3px solid #f3f4f6; overflow: hidden;">
+        {% if a.agency_image %}
+        <img src="{{ a.agency_image }}" style="width: 100%; height: 100%; object-fit: cover;">
+        {% else %}
+        <i class="fas fa-building" style="font-size: 28px; color: #94a3b8;"></i>
+        {% endif %}
+      </div>
+      <h4 style="font-size: 16px; font-weight: 700; color: #1f2937; margin-bottom: 4px;">{{ a.name }}</h4>
+      <div style="font-size: 11px; font-weight: 600; color: #6366f1; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Top Rated Agency</div>
+      <a href="{% url 'user_view_agency_services' a.agency_id %}" class="btn btn-sm" style="width: 100%; justify-content: center; background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe; border-radius: 8px;">View Services</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

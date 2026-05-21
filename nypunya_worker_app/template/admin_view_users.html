@@ -1,0 +1,60 @@
+{% extends "base_admin.html" %}
+{% block title %}Manage Users – Admin Dashboard{% endblock %}
+{% block page_heading %}<i class="fas fa-users"></i> Registered Users{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+    <h3><i class="fas fa-user-circle"></i> User Directory</h3>
+    <span class="badge" style="background: var(--accent-light); color: var(--accent); border: none;">{{ users|length }} Total Users</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Profile</th>
+          <th>User ID</th>
+          <th>Full Name</th>
+          <th>Contact Phone</th>
+          <th>Email Address</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr>
+          <td>
+            {% if u.user_image %}
+            <img src="{{ u.user_image }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            {% else %}
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1; border: 2px solid #e2e8f0;">
+              <i class="fas fa-user-circle" style="font-size: 20px;"></i>
+            </div>
+            {% endif %}
+          </td>
+          <td style="font-weight: 600; color: var(--accent);">{{ u.user_id }}</td>
+          <td>{{ u.name }}</td>
+          <td>{{ u.phone }}</td>
+          <td>{{ u.email }}</td>
+          <td style="color: var(--text-muted); font-size: 0.9em;">{{ u.address|truncatewords:8 }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="td-empty">
+            <i class="fas fa-users-slash" style="font-size: 2em; opacity: 0.2; display: block; margin-bottom: 10px;"></i>
+            No users registered on the platform yet.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div style="margin-top: 24px; padding: 20px; background: #f8fafc; border-radius: 12px; border: 1px dashed var(--card-border);">
+  <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+    <i class="fas fa-info-circle" style="color: var(--accent);"></i> 
+    This list contains all registered individuals on the platform. Use this directory to verify identity or contact users regarding their service requests and platform experience.
+  </p>
+</div>
+{% endblock %}

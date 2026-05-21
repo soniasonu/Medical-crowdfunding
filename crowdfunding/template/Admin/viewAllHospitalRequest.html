@@ -1,0 +1,41 @@
+{% extends 'Admin/PageHeader.html' %}
+{% block content %}
+<div class="wrapper row3" style="background: transparent;">
+  <main class="hoc container clear"> 
+    <div class="view-container">
+        <h2>View All New Hospital Requests</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hospital ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>District</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th style="text-align: center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in data %}
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td>{{ row.4 }}</td>
+                    <td>{{ row.5 }}</td>
+                    <td><span style="background: #fff7ed; color: #9a3412; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold;">{{ row.6 }}</span></td>
+                    <td style="text-align: center;">
+                        <a href="/approvehos/{{ row.0 }}" class="btn-sm" style="background-color: #059669; color: white !important;">Approve</a>
+                        <a href="/rejecthos/{{ row.0 }}" class="btn-sm" style="background-color: #dc2626; color: white !important; margin-left: 5px;">Reject</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+{% endblock %}

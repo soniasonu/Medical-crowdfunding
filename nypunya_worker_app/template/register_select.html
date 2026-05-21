@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register – Nypunya Worker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body class="auth-body" style="align-items:flex-start;padding-top:60px;">
+<div style="width:100%;max-width:560px;margin:0 auto;">
+  <div class="auth-logo" style="text-align:center;margin-bottom:28px;">
+    <div class="logo-icon" style="display:inline-flex;margin:0 auto 12px;"><i class="fas fa-tools"></i></div>
+    <h1 style="font-size:22px;font-weight:800;color:var(--text-main);">Create an Account</h1>
+    <p style="color:var(--text-muted);font-size:13px;">Choose your role to get started</p>
+  </div>
+  <div class="reg-grid">
+    <a href="{% url 'register_user' %}" class="reg-card">
+      <div class="ri" style="background:rgba(37,99,235,.15);color:#93c5fd;"><i class="fas fa-user"></i></div>
+      <h3>Public User</h3>
+      <p>Request jobs, hire workers, submit feedback and complaints.</p>
+    </a>
+    <a href="{% url 'register_agency' %}" class="reg-card">
+      <div class="ri" style="background:rgba(124,58,237,.15);color:#c4b5fd;"><i class="fas fa-building"></i></div>
+      <h3>Agency</h3>
+      <p>Manage workers, accept job requests and set quotations.</p>
+    </a>
+    <a href="{% url 'register_worker' %}" class="reg-card">
+      <div class="ri" style="background:rgba(5,150,105,.15);color:#6ee7b7;"><i class="fas fa-hard-hat"></i></div>
+      <h3>Worker</h3>
+      <p>Register under a category and get assigned to jobs.</p>
+    </a>
+  </div>
+  <div class="auth-footer" style="text-align:center;margin-top:24px;font-size:13px;color:var(--text-muted);">
+    Already have an account? <a href="{% url 'login' %}" style="color:#a78bfa;font-weight:600;">Sign in</a>
+  </div>
+</div>
+</body>
+</html>

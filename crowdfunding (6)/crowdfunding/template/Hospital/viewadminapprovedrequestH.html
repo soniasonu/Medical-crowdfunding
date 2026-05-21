@@ -1,0 +1,47 @@
+{% extends 'Hospital/pageheader.html' %}
+{% block content %}
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="view-container">
+        <h2>Admin Approved Funding</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Requirement</th>
+                    <th>Details</th>
+                    <th>Required Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.12 }}</td>
+                    <td>{{ row.13 }}</td>
+                    <td>{{ row.17 }}</td>
+                    <td>{{ row.4 }}</td>
+                    <td>{{ row.5 }}</td>
+                    <td><strong style="color: #3b82f6;">₹ {{ row.10 }}</strong></td>
+                    <td><span style="background: #f3e8ff; color: #7e22ce; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 700;">{{ row.6 }}</span></td>
+                    <td>
+                        <a href="/hospital_delete_fund_request/{{ row.0 }}" class="btn-sm" style="background: #dc2626; color: #fff !important;" onclick="return confirm('Are you sure you want to delete this approved request?')">🗑 Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" style="text-align: center; padding: 30px; color: #64748b; font-style: italic;">No approved funding found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

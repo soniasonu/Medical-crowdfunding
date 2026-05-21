@@ -1,0 +1,40 @@
+{% extends 'Admin/PageHeader.html' %}
+{% block content %}
+<div class="wrapper row3" style="background: transparent;">
+  <main class="hoc container clear"> 
+    <div class="table-wrapper">
+        <h2 style="color: #333; margin-bottom: 20px;">Feedback Report</h2>
+        <table class="premium-table">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Title</th>
+                    <th>Feedback Date</th>
+                    <th>Reply</th>
+                    <th>Description</th>
+                    <th>Treatment Category</th>
+                    <th>Treatment Details</th>
+                    <th style="text-align: center;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in data %}
+                <tr>
+                    <td>{{ row.1 }}</td>
+                    <td><strong style="color: #333;">{{ row.2 }}</strong></td>
+                    <td>{{ row.3 }}</td>
+                    <td><span style="color: #616161;">{{ row.4 }}</span></td>
+                    <td>{{ row.5 }}</td>
+                    <td><span style="background: #e3f2fd; color: #1976d2; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">{{ row.6 }}</span></td>
+                    <td>{{ row.7 }}</td>
+                    <td style="text-align: center;">
+                        <a href="/selectReply/{{ row.0 }}" class="btn-sm btn-approve">Send Reply</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+{% endblock %}

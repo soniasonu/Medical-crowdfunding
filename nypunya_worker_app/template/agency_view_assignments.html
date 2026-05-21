@@ -1,0 +1,59 @@
+{% extends "base_agency.html" %}
+{% block title %}Assignments History – Agency Dashboard{% endblock %}
+{% block page_heading %}Assignments History{% endblock %}
+
+{% block content %}
+<div class="card" style="margin-top:20px;">
+  <div class="card-header">
+    <h3><i class="fas fa-clipboard-check"></i> Work Assignment History</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Assign ID</th><th>Work ID</th><th>Worker ID</th><th>Date</th><th>Description</th><th>Status</th></tr></thead>
+      <tbody>
+        {% for a in assignments %}
+        <tr>
+          <td>{{ a.assign_id }}</td>
+          <td>{{ a.request_work_id }}</td>
+          <td>
+            <div style="font-weight: 700;">{{ a.worker.name }}</div>
+            <div style="font-size: 10px; color: #64748b;">ID: {{ a.worker_id }}</div>
+          </td>
+          <td>{{ a.assign_date }}</td>
+          <td>
+            <div style="font-size: 12px; color: #334155; margin-bottom: 5px;">{{ a.work_description }}</div>
+            
+            {% if a.photos %}
+            <div style="display: flex; gap: 6px; margin-top: 8px;">
+              {% for p in a.photos %}
+              <a href="{{ p.photo_path }}" target="_blank">
+                <img src="{{ p.photo_path }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; cursor: zoom-in;">
+              </a>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </td>
+          <td>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              {% if a.status == 'assigned' %}<span class="badge assigned">Assigned</span>
+              {% elif a.status == 'confirmed' %}<span class="badge confirmed">Confirmed</span>
+              {% elif a.status == 'finished_by_worker' %}<span class="badge" style="background: #dcfce7; color: #166534; border: 1px solid #bbf7d0;">Review Evidence</span>
+              {% elif a.status == 'completed' %}<span class="badge confirmed"><i class="fas fa-check-circle"></i> Completed</span>
+              {% else %}<span class="badge">{{ a.status }}</span>{% endif %}
+              
+              {% if r.status == 'finished_by_worker' or a.status == 'finished_by_worker' %}
+              <a href="{% url 'agency_mark_completed' a.request_work_id %}" class="btn btn-sm btn-primary" style="font-size: 10px; padding: 4px 8px; border-radius: 4px;">
+                <i class="fas fa-check"></i> Mark Completed
+              </a>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="td-empty">No historical assignments.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

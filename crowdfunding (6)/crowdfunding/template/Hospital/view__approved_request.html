@@ -1,0 +1,152 @@
+{% extends 'Hospital/HEADER.html' %}
+{% block content %}
+
+<style>
+.glass-container {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    margin: 40px auto;
+    max-width: 1100px;
+    color: #fff;
+}
+
+.glass-container h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.premium-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.premium-table thead tr {
+    background: linear-gradient(90deg, rgba(0,198,255,0.4), rgba(0,114,255,0.4));
+}
+
+.premium-table th {
+    padding: 13px 14px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.premium-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+}
+
+.premium-table tbody tr:hover {
+    background: rgba(255,255,255,0.07);
+}
+
+.btn-approve {
+    background: linear-gradient(45deg, #20c997, #0072ff);
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 5px;
+    transition: transform 0.2s;
+}
+
+.btn-delete {
+    background: linear-gradient(45deg, #ff4444, #c0392b);
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.btn-approve:hover, .btn-delete:hover {
+    transform: scale(1.06);
+    color: #fff;
+    text-decoration: none;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+}
+</style>
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="glass-container">
+        <h2>📋 New Hospital Requests</h2>
+
+        <table class="premium-table">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Req ID</th>
+                    <th>Request Date</th>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Approved Date</th>
+                    <th>Hosp. Status</th>
+                    <th>Required ₹</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td>{{ row.4 }}</td>
+                    <td>{{ row.5 }}</td>
+                    <td>{{ row.6 }}</td>
+                    <td>{{ row.7 }}</td>
+                    <td>{{ row.9 }}</td>
+                    <td>₹ {{ row.10 }}</td>
+                    <td>
+                        <a href="/approve_req/{{ row.0 }}" class="btn-approve">✔ Approve</a>
+                        <a href="/reject_req/{{ row.0 }}" class="btn-delete">✗ Reject</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="11" class="empty-state">No pending requests.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

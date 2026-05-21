@@ -1,0 +1,41 @@
+{% extends 'donor/pageheader.html' %}
+{% block content %}
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="view-container">
+        <h2>Patients Needing Funds</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Patient Name</th>
+                    <th>Disease / OT Details</th>
+                    <th>Amount Needed</th>
+                    <th>Donate</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in data %}
+                <tr>
+                    <td>{{ p.0 }}</td>
+                    <td><strong>{{ p.2 }}</strong></td>
+                    <td>{{ p.5 }}</td>
+                    <td><strong style="color: #ec4899;">₹ {{ p.6 }}</strong></td>
+                    <td>
+                        <a href="/donate_amount/{{ p.0 }}" class="btn-sm" style="background: #ec4899; color: #fff !important;">❤️ Donate Now</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 40px; color: #64748b; font-style: italic;">No patients currently seeking funding.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

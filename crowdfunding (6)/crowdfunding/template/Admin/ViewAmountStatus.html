@@ -1,0 +1,50 @@
+{% include 'Admin/PageHeader.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 30%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<h2>Total Collection Details</h2>
+<table style="width:100%">
+  <tr>
+    <th> </th>
+    <th> </th>
+    <th> </th>
+  </tr>
+  <tr>
+    <td> </td>
+    <td>Collected Amount</td>
+    <td>Required Amount</td>
+      <td>Balance Required Amount </td>
+  </tr>
+
+
+  <tr>
+    <td> </td>
+    <td>{{data.0}}</td>
+    <td>{{data.1}}</td>
+    <td>{{  request.session.b }}  </td>
+  </tr>
+</table>
+
+
+</body>
+</html>

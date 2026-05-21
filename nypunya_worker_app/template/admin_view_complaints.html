@@ -1,0 +1,42 @@
+{% extends "base_admin.html" %}
+{% block title %}Complaint Reports – Admin Dashboard{% endblock %}
+{% block page_heading %}<i class="fas fa-exclamation-circle"></i> User Complaints{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h3>Submitted Complaints</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>User ID</th><th>Date</th><th>Description</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for c in complaints %}
+        <tr>
+          <td>{{ c.complaint_id }}</td>
+          <td>{{ c.user_id }}</td>
+          <td>{{ c.complaint_date }}</td>
+          <td>{{ c.description }}</td>
+          <td>
+            {% if c.status == 'resolved' %}
+              <span class="badge approved"><i class="fas fa-check-circle"></i> Resolved</span>
+            {% else %}
+              <span class="badge pending"><i class="fas fa-clock"></i> Open</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if c.status != 'resolved' %}
+              <a href="{% url 'admin_complaint_resolve' c.complaint_id %}" class="btn btn-success btn-sm">
+                <i class="fas fa-check"></i> Resolve
+              </a>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4" class="td-empty"><i class="fas fa-smile"></i> No complaints received yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

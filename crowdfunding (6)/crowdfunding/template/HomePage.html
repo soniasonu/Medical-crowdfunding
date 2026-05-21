@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowdfunding App | Hope & Healthcare</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --text-main: #0f172a;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-color: var(--bg-light);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* --- Global Navbar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 15px 5%;
+        }
+
+        .navbar.scrolled .logo, .navbar.scrolled .nav-links a {
+            color: var(--text-main);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+            transition: color 0.3s;
+        }
+
+        .logo span { color: var(--secondary); }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--secondary); }
+
+        .btn-register {
+            background: var(--primary);
+            color: #fff !important;
+            padding: 12px 28px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.6);
+            background: var(--primary-dark);
+        }
+
+        /* --- Hero Section with CSS Grid Overlay --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('/static/images/hero.png') center/cover no-repeat;
+            z-index: 1;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.4) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            color: #fff;
+            animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(14, 165, 233, 0.2);
+            border: 1px solid rgba(14, 165, 233, 0.5);
+            color: #bae6fd;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #e2e8f0;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .hero-actions { display: flex; gap: 20px; }
+
+        .btn-main {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+        .btn-main:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover {
+            background: #fff;
+            color: var(--text-main);
+            transform: translateY(-3px);
+        }
+
+        /* --- Stats Banner --- */
+        .stats-banner {
+            position: relative;
+            background: #fff;
+            padding: 50px 5%;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            z-index: 10;
+            transform: translateY(-50%);
+            margin: 0 5%;
+            border-radius: 20px;
+        }
+
+        .stat-block { text-align: center; }
+        .stat-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-text {
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        /* --- Features Section --- */
+        .features {
+            padding: 80px 5% 120px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 24px;
+            text-align: left;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.1);
+            border-color: rgba(37, 99, 235, 0.1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 30px;
+            transform: rotate(-5deg);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* --- How it Works / CTA --- */
+        .cta-section {
+            background: var(--text-main);
+            color: #fff;
+            padding: 100px 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-bg {
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 50px;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+        .cta-content p {
+            font-size: 20px;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+        }
+
+        .footer {
+            background: #020617;
+            color: #94a3b8;
+            padding: 50px 5%;
+            text-align: center;
+            font-size: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 48px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .stats-banner { flex-direction: column; gap: 30px; transform: none; margin: -50px 5% 50px; }
+            .navbar { padding: 15px 5%; background: var(--text-main); }
+            .logo, .nav-links a { color: #fff; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="/" class="logo">
+            <i>+</i> Crowd<span>Funding</span>
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/login/">Login</a>
+            <a href="/viewDistHOSPitAL" class="btn-register">Register Hospital</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Medical Healthcare & Crowdfunding</div>
+            <h1>Every Life Deserves <span>A Chance.</span></h1>
+            <p>
+                Join an inspiring community dedicated to bringing high-quality medical care to patients in need. Your donation funds critical treatments, surgeries, and life-saving care across top-rated hospitals.
+            </p>
+            <div class="hero-actions">
+                <a href="/donor_register" class="btn-main">Become a Donor</a>
+                <a href="/view_hospitals" class="btn-outline">View Hospitals</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <div class="stats-banner">
+        <div class="stat-block">
+            <div class="stat-num">15K+</div>
+            <div class="stat-text">Patients Helped</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-num">$12M</div>
+            <div class="stat-text">Total Funds Raised</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-num">250+</div>
+            <div class="stat-text">Partner Hospitals</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-num">100%</div>
+            <div class="stat-text">Transparent Funding</div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Why Choose Our Platform</h2>
+        <p class="section-subtitle">We bridge the gap between healthcare requirements and generous donors, ensuring transparency and efficiency at every step.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏥</div>
+                <h3>Verified Hospitals</h3>
+                <p>We partner exclusively with verified and accredited hospitals. Every patient request is authenticated by medical professionals before being listed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Complete Transparency</h3>
+                <p>Track exactly where your money goes. View real-time funding statuses and receive updates when patient campaigns achieve their goals.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast Direct Funding</h3>
+                <p>Funds are transferred directly to hospitals for the patient's immediate medical expenses. No delays, no middlemen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-bg"></div>
+        <div class="cta-content">
+            <h2>Ready to Make an Impact?</h2>
+            <p>Join thousands of donors who are saving lives every day. Whether you are a hospital looking to register your patients, or a donor wanting to help.</p>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <a href="/donor_register" class="btn-main" style="background: #fff; color: var(--primary);">Donate Now</a>
+                <a href="/viewDistHOSPitAL" class="btn-main">Register Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer">
+        &copy; 2026 Crowdfunding App. Dedicated to Healthcare Support.<br/>
+        Designed with precision and care for the community.
+    </div>
+
+    <script>
+        // Simple script to toggle navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

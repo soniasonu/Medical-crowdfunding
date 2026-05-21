@@ -1,0 +1,49 @@
+{% extends 'Hospital/pageheader.html' %}
+{% block content %}
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="view-container">
+        <h2>Collected Amount Report</h2>
+        
+        <div style="margin-bottom: 25px; display: flex; justify-content: flex-end;">
+            <form method="GET" action="" style="display: flex; gap: 10px; width: 100%; max-width: 400px;">
+                <input type="text" name="q" value="{{ query }}" placeholder="Search by patient name..." 
+                       style="flex: 1; padding: 10px 15px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none;">
+                <button type="submit" class="btn-sm" style="background: #0891b2; color: #fff !important; white-space: nowrap;">🔍 Search</button>
+                {% if query %}
+                    <a href="/viewamountcollectiondetails" class="btn-sm" style="background: #64748b; color: #fff !important; display: flex; align-items: center;">✕ Clear</a>
+                {% endif %}
+            </form>
+        </div>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Credited Date</th>
+                    <th>Donor Name</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td><strong>{{ row.0 }}</strong></td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td><strong style="color: #059669;">₹ {{ row.3 }}</strong></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 30px; color: #64748b; font-style: italic;">No collection records found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

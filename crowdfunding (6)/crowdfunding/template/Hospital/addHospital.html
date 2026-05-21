@@ -1,0 +1,127 @@
+{% extends 'Hospital/pageheader.html' %}
+{% block content %}
+<style>
+    .registration-page {
+        background: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
+        min-height: calc(100vh - 70px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 50px 20px;
+    }
+    .reg-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 24px;
+        padding: 45px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+        color: #fff;
+    }
+    .reg-card h2 {
+        text-align: center;
+        font-size: 30px;
+        font-weight: 800;
+        margin-bottom: 30px;
+        background: linear-gradient(to right, #38bdf8, #818cf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group.full { grid-column: span 2; }
+    .form-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 13px 16px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: #fff;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #38bdf8;
+        box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15);
+        outline: none;
+    }
+    .btn-reg {
+        grid-column: span 2;
+        padding: 16px;
+        background: linear-gradient(135deg, #0284c7, #4f46e5);
+        border: none;
+        border-radius: 12px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+    }
+    .btn-reg:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+    }
+</style>
+
+<div class="registration-page">
+    <div class="reg-card">
+        <h2>Hospital Onboarding</h2>
+        
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form-grid">
+                <div class="form-group full">
+                    <label>Hospital Name</label>
+                    <input type="text" name="TxtName" required pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" placeholder="Official Hospital Name">
+                </div>
+                
+                <div class="form-group full">
+                    <label>Full Address</label>
+                    <textarea name="TxtAddress" rows="2" required placeholder="Hospital street address"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone No</label>
+                    <input type="tel" name="TxtPhone" pattern="[6-9]{1}[0-9]{9}" required placeholder="91-XXXXXXXXXX">
+                </div>
+                
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" name="location" required placeholder="City/District">
+                </div>
+                
+                <div class="form-group">
+                    <label>Portal User ID</label>
+                    <input type="text" name="hospital_id" required placeholder="Choose username">
+                </div>
+                
+                <div class="form-group">
+                    <label>Portal Password</label>
+                    <input type="password" name="password" required placeholder="Create password">
+                </div>
+                
+                <button type="submit" class="btn-reg">Register Facility 🏥</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base_agency.html" %}
+{% block title %}Job Requests – Agency Dashboard{% endblock %}
+{% block page_heading %}Job Requests{% endblock %}
+
+{% block content %}
+<div class="card" style="margin-top:20px;">
+  <div class="card-header">
+    <h3><i class="fas fa-briefcase"></i> Incoming Job Requests</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>User</th><th>Date</th><th>Description</th><th>Amount</th><th>Status</th><th>Set Amount</th><th>Assign Worker</th></tr></thead>
+      <tbody>
+        {% for r in job_requests %}
+        <tr>
+          <td>{{ r.request_work_id }}</td>
+          <td>{{ r.user_id }}</td>
+          <td>{{ r.request_date }}</td>
+          <td>{{ r.work_description }}</td>
+          <td>{% if r.amount %}<strong>₹{{ r.amount }}</strong>{% else %}<span class="text-muted">—</span>{% endif %}</td>
+          <td>
+            {% if r.status == 'pending' %}<span class="badge pending">Pending</span>
+            {% elif r.status == 'enquiry' %}<span class="badge info" style="background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd;">Enquiry</span>
+            {% elif r.status == 'cancelled' %}
+              <span class="badge danger" style="background: #fee2e2; color: #ef4444; border: 1px solid #fecaca;">Cancelled</span>
+              {% if r.cancel_reason %}
+              <div style="font-size: 11px; color: #dc2626; margin-top: 5px; font-weight: 600; background: #fff1f2; padding: 4px; border-radius: 4px;">
+                <i class="fas fa-exclamation-triangle"></i> {{ r.cancel_reason }}
+              </div>
+              {% endif %}
+            {% elif r.status == 'quoted' %}<span class="badge quoted">Quoted</span>
+            {% elif r.status == 'assigned' %}<span class="badge assigned">Assigned</span>
+            {% elif r.status == 'confirmed' %}<span class="badge confirmed">Confirmed</span>
+            {% else %}<span class="badge">{{ r.status }}</span>{% endif %}
+            
+            {% if r.agency_reply %}
+            <div style="font-size: 10px; color: #059669; margin-top: 5px;"><i class="fas fa-reply"></i> Replied</div>
+            {% endif %}
+          </td>
+          <td>
+            {% if r.status == 'pending' %}
+            <form method="post" action="{% url 'agency_set_amount' r.request_work_id %}">
+              {% csrf_token %}
+              <div class="inline-form">
+                <input type="number" name="amount" placeholder="₹" min="0" required>
+                <button type="submit" class="btn btn-info btn-sm">Set</button>
+              </div>
+            </form>
+            {% elif r.status == 'enquiry' %}
+            <form method="post" action="{% url 'agency_reply_enquiry' r.request_work_id %}">
+              {% csrf_token %}
+              <div class="inline-form">
+                <input type="text" name="agency_reply" placeholder="Write reply..." required style="min-width: 140px;">
+                <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-share"></i> Reply</button>
+              </div>
+            </form>
+            {% else %}<span class="text-muted">—</span>{% endif %}
+          </td>
+          <td>
+            {% if r.status == 'quoted' or r.status == 'pending' or r.status == 'enquiry' %}
+            <form method="post" action="{% url 'agency_assign_worker' r.request_work_id %}">
+              {% csrf_token %}
+              <div class="inline-form">
+                <select name="worker_id" required>
+                  <option value="">Select</option>
+                  {% for w in workers_approved %}
+                  <option value="{{ w.worker_id }}">{{ w.name }}</option>
+                  {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary btn-sm">Assign</button>
+              </div>
+            </form>
+            {% else %}<span class="text-muted">—</span>{% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8" class="td-empty">No job requests yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

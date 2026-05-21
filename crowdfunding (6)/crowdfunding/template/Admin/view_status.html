@@ -1,0 +1,146 @@
+{% extends 'Admin/PageHeader.html' %}
+{% block content %}
+
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Patient Fund Status</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+/* Glass Container */
+.glass-container {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    margin: 60px auto;
+    max-width: 700px;
+    text-align: center;
+    color: #111; /* FIXED TEXT COLOR */
+}
+
+/* Heading */
+.glass-container h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #111;
+}
+
+/* Patient Name */
+.patient-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #222;
+}
+
+/* Grid */
+.status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+/* Cards */
+.status-card {
+    background: rgba(255,255,255,0.25);
+    border-radius: 14px;
+    padding: 22px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.status-card:hover {
+    transform: translateY(-5px);
+}
+
+.s-label {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.s-value {
+    font-size: 26px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Card Colors */
+.needed  { border-top: 4px solid #00c6ff; }
+.collected { border-top: 4px solid #20c997; }
+.remaining { border-top: 4px solid #ff6b35; }
+
+/* Progress Bar */
+.progress-bar-outer {
+    background: rgba(0,0,0,0.1);
+    border-radius: 50px;
+    height: 14px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00c6ff, #20c997);
+    border-radius: 50px;
+    transition: width 0.6s ease;
+}
+
+.progress-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="glass-container">
+
+    <h2>📊 Patient Fund Status</h2>
+
+    <!-- Django Variable -->
+    <div class="patient-name">{{ name }}</div>
+
+    <div class="status-grid">
+        <div class="status-card needed">
+            <div class="s-label">Total Needed</div>
+            <div class="s-value">₹ {{ needed }}</div>
+        </div>
+
+        <div class="status-card collected">
+            <div class="s-label">Collected</div>
+            <div class="s-value">₹ {{ collected }}</div>
+        </div>
+    </div>
+
+    <div class="status-card remaining">
+        <div class="s-label">Remaining</div>
+        <div class="s-value">₹ {{ remaining }}</div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-outer">
+        <div class="progress-bar-fill" style="width: {{ progress }}%;"></div>
+    </div>
+
+    <div class="progress-label">{{ progress }}% Funded</div>
+
+</div>
+
+</body>
+</html>
+{% endblock %}

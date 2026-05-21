@@ -1,0 +1,67 @@
+{% extends "base_worker.html" %}
+{% block title %}Worker Dashboard – Nypunya Worker{% endblock %}
+{% block page_heading %}Worker Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>Overview</h2>
+  <p>Quick summary of your work and training</p>
+</div>
+
+{% if worker.status != 'approved' %}
+<div class="card" style="margin-bottom:20px; border-left:4px solid #f59e0b; background: #fffbeb;">
+  <div style="padding:15px; display:flex; align-items:center; gap:12px;">
+    <i class="fas fa-hourglass-half" style="color:#d97706; font-size:1.2em;"></i>
+    <div>
+      <strong style="color:#92400e;">Account Pending Approval</strong>
+      <p style="color:#b45309; margin:0; font-size:0.9em;">Your registration is under review. You can explore training, but jobs will be assigned only after approval.</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Stats -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon purple"><i class="fas fa-tags"></i></div>
+    <span class="value">{{ categories|length }}</span>
+    <span class="label">My Categories</span>
+    <div class="stat-accent-bar"></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon blue"><i class="fas fa-briefcase"></i></div>
+    <span class="value">{{ assignments|length }}</span>
+    <span class="label">Assigned Jobs</span>
+    <div class="stat-accent-bar" style="background:linear-gradient(90deg,#2563eb,#1d4ed8)"></div>
+  </div>
+</div>
+
+<div class="grid grid-cols-2 gap-20" style="margin-top:30px;">
+  <div class="card">
+    <div class="card-header"><h3><i class="fas fa-tags"></i> My Skills</h3></div>
+    <div style="padding:20px;">
+      <p style="color:#64748b; margin-bottom:16px;">You are verified in {{ categories|length }} work categories.</p>
+      <a href="{% url 'worker_view_categories' %}" class="btn btn-primary w-full" style="justify-content:center;">View Categories</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3><i class="fas fa-clipboard-list"></i> Active Tasks</h3></div>
+    <div style="padding:20px;">
+      <p style="color:#64748b; margin-bottom:16px;">You have {{ assignments|length }} jobs assigned to you.</p>
+      <a href="{% url 'worker_view_assignments' %}" class="btn btn-success w-full" style="justify-content:center;">View Assigned Jobs</a>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:30px;">
+  <div class="card-header"><h3><i class="fas fa-graduation-cap"></i> Skill Development</h3></div>
+  <div style="padding:20px; display:flex; justify-content:space-between; align-items:center;">
+    <div>
+      <p style="color:#64748b; margin-bottom:4px;">Enhance your expertise with our training videos.</p>
+      <span style="font-size:0.9em; color:#94a3b8;">{{ training_videos|length }} videos available</span>
+    </div>
+    <a href="{% url 'worker_view_training' %}" class="btn btn-info"><i class="fas fa-play"></i> Go to Training</a>
+  </div>
+</div>
+{% endblock %}
+

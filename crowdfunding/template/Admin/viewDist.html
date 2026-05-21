@@ -1,0 +1,37 @@
+{% extends 'Admin/PageHeader.html' %}
+{% block content %}
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="view-container">
+        <h2>📍 View Districts</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>District Name</th>
+                    <th>Hospitals</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td><strong>{{ row.1 }}</strong></td>
+                    <td>
+                        <a href="/viewapprovedHospital/{{ row.0 }}" class="btn-sm">🏥 View Hospitals</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 40px; color: #64748b; font-style: italic;">No districts found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

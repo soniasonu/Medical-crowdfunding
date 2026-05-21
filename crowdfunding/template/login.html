@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CROWDFUNDING APP — Login</title>
+    <link rel="stylesheet" href="/static/Admin/layout/styles/layout.css" type="text/css" media="all">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1b3e 40%, #0a2e1a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Animated background orbs */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -200px; left: -200px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0,198,255,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -200px; right: -200px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(40px, 40px); }
+        }
+
+        /* Top nav bar */
+        .topbar {
+            background: rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding: 14px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .topbar .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .topbar .logo span {
+            background: linear-gradient(90deg, #00c6ff, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .topbar nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .topbar nav a:hover { color: #fff; }
+
+        /* Main centered area */
+        .login-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* The login card */
+        .login-card {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 24px;
+            padding: 50px 44px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            color: #fff;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card .brand-icon {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .login-card h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .login-card .subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 36px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255,255,255,0.35);
+        }
+
+        .form-group input:focus {
+            border-color: #00c6ff;
+            box-shadow: 0 0 0 3px rgba(0,198,255,0.15);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 6px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,114,255,0.45);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 22px 0;
+        }
+
+        .divider hr {
+            flex: 1;
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .divider span {
+            color: rgba(255,255,255,0.35);
+            font-size: 12px;
+        }
+
+        .register-link {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .register-link a {
+            color: #00c6ff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .register-link a:hover {
+            color: #7dd3fc;
+            text-decoration: underline;
+        }
+
+        .roles-hint {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+
+        .role-badge {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+    <a href="/" class="logo">CROWD<span>FUND</span></a>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/viewDistHOSPitAL">Register Hospital</a>
+        <a href="/donor_register">Register as Donor</a>
+    </nav>
+</div>
+
+<!-- Login Form -->
+<div class="login-wrapper">
+    <div class="login-card">
+
+        <div class="brand-icon">🏥</div>
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Sign in to your account</p>
+
+        <form method="POST" action="/login1">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Username / Email</label>
+                <input type="text" name="un" placeholder="Enter your username or email" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <label style="margin-bottom: 0;">Password</label>
+                    <a href="/forgot_password" style="font-size: 11px; color: #00c6ff; text-decoration: none;">Forgot Password?</a>
+                </div>
+                <input type="password" name="pass" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="btn-login">🔐 Sign In</button>
+        </form>
+
+        <div class="divider">
+            <hr><span>Available Roles</span><hr>
+        </div>
+
+        <div class="roles-hint">
+            <span class="role-badge">👨‍💼 Admin</span>
+            <span class="role-badge">🏥 Hospital</span>
+            <span class="role-badge">❤️ Donor</span>
+            <span class="role-badge">🩺 Patient</span>
+        </div>
+
+        <div class="register-link" style="margin-top:22px;">
+            New hospital? <a href="/viewDistHOSPitAL">Register here</a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

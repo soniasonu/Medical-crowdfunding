@@ -1,0 +1,26 @@
+{% extends 'Hospital/pageheader.html' %}
+{% block content %}
+<div class="wrapper row3" style="background: transparent;">
+  <main class="hoc container clear"> 
+    <div class="view-container">
+        <h2>Register Patient Expense</h2>
+        <form id="form1" name="form1" method="post" action="/expense_action">
+            {% csrf_token %}
+            <div style="margin-bottom: 20px;">
+                <label for="title" style="display: block; margin-bottom: 8px; font-weight: 600;">Title</label>
+                <input type="text" id="title" name="title" placeholder="Expense Title" required>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label for="details" style="display: block; margin-bottom: 8px; font-weight: 600;">Description</label>
+                <textarea id="details" name="details" rows="3" placeholder="Medical details" required></textarea>
+            </div>
+            <div style="margin-bottom: 25px;">
+                <label for="amount" style="display: block; margin-bottom: 8px; font-weight: 600;">Required Amount</label>
+                <input type="number" id="amount" name="amount" placeholder="Amount (₹)" required>
+            </div>
+            <button type="submit">Submit Expense</button>
+        </form>
+    </div>
+  </main>
+</div>
+{% endblock %}

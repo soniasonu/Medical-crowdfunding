@@ -1,0 +1,100 @@
+{% extends "base_admin.html" %}
+{% block title %}NLP Feedback Analysis – Admin Dashboard{% endblock %}
+{% block page_heading %}<i class="fas fa-chart-bar"></i> Feedback Analysis{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h3>Agency Sentiment Distribution</h3>
+  </div>
+  <div class="chart-container">
+    <canvas id="nlpChart" height="220"></canvas>
+  </div>
+  <div class="divider"></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agency ID</th><th>Positive Impact Rate</th><th>Development Areas</th></tr></thead>
+      <tbody>
+        {% for f in feedback_nltk %}
+        <tr>
+          <td><strong style="color:#2563eb;">{{ f.agency_id }}</strong></td>
+          <td>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="color:#059669; font-weight:700;"><i class="fas fa-arrow-trend-up"></i> {{ f.pos_pct }}% Excellent</span>
+              <span style="color:#94a3b8; font-size:0.85em;">({{ f.positive_count|default:0 }} count)</span>
+            </div>
+          </td>
+          <td>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="color:#dc2626; font-weight:700;"><i class="fas fa-circle-exclamation"></i> {{ f.neg_pct }}% Improvements</span>
+              <span style="color:#94a3b8; font-size:0.85em;">({{ f.negative_count|default:0 }} count)</span>
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3" class="td-empty">No sentiment analysis available yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" style="margin-top:28px;">
+  <div class="card-header">
+    <h3>Recent Raw Feedback</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>User ID</th><th>Date</th><th>Feedback</th></tr></thead>
+      <tbody>
+        {% for f in feedback_list %}
+        <tr>
+          <td>{{ f.user_id }}</td>
+          <td>{{ f.feedback_date }}</td>
+          <td>{{ f.description }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3" class="td-empty">No feedback entries found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+(function () {
+  const labels = [{% for f in feedback_nltk %}"{{ f.agency_id }}"{% if not forloop.last %},{% endif %}{% endfor %}];
+  const pos    = [{% for f in feedback_nltk %}{{ f.positive_count|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}];
+  const neg    = [{% for f in feedback_nltk %}{{ f.negative_count|default:0 }}{% if not forloop.last %},{% endif %}{% endfor %}];
+
+  const ctx = document.getElementById('nlpChart');
+  if (!ctx || !labels.length) return;
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Positive', data: pos, backgroundColor: 'rgba(5,150,105,0.75)', borderColor: '#059669', borderWidth: 1.5, borderRadius: 6 },
+        { label: 'Negative', data: neg, backgroundColor: 'rgba(220,38,38,0.75)', borderColor: '#dc2626', borderWidth: 1.5, borderRadius: 6 },
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#8b949e', font: { family: 'Inter', size: 12 } } },
+        tooltip: { bodyFont: { family: 'Inter' } }
+      },
+      scales: {
+        x: { ticks: { color: '#8b949e', font: { family: 'Inter' } }, grid: { color: 'rgba(48,54,61,0.7)' } },
+        y: { ticks: { color: '#8b949e', font: { family: 'Inter' }, stepSize: 1 }, grid: { color: 'rgba(48,54,61,0.7)' }, beginAtZero: true }
+      }
+    }
+  });
+})();
+</script>
+{% endblock %}

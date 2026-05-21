@@ -1,0 +1,126 @@
+{% extends 'Hospital/pageheader.html' %}
+{% block content %}
+<style>
+    .patient-reg-page {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        min-height: calc(100vh - 70px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+    }
+    .reg-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 40px;
+        width: 100%;
+        max-width: 550px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+    .reg-card h2 {
+        text-align: center;
+        color: #0f172a;
+        font-size: 26px;
+        font-weight: 800;
+        margin-bottom: 30px;
+        border-bottom: 3px solid #0891b2;
+        padding-bottom: 10px;
+        display: inline-block;
+        width: 100%;
+    }
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .form-group { margin-bottom: 5px; }
+    .form-group.full { grid-column: span 2; }
+    .form-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        color: #475569;
+        margin-bottom: 8px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 2px solid #f1f5f9;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: border-color 0.2s;
+        background: #f8fafc;
+    }
+    .form-group input:focus {
+        border-color: #0891b2;
+        outline: none;
+        background: #fff;
+    }
+    .btn-submit {
+        grid-column: span 2;
+        padding: 14px;
+        background: #0891b2;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-top: 15px;
+    }
+    .btn-submit:hover {
+        background: #0e7490;
+    }
+</style>
+
+<div class="patient-reg-page">
+    <div class="reg-card">
+        <h2>Register New Patient</h2>
+        
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-grid">
+                <div class="form-group full">
+                    <label>Patient Full Name</label>
+                    <input type="text" name="name" placeholder="Full name of the patient" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" name="age" placeholder="Age" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select name="gender" required>
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group full">
+                    <label>Treatment / OT Details</label>
+                    <textarea name="ot_details" rows="3" placeholder="Describe the treatment needed..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Funding Goal (₹)</label>
+                    <input type="number" name="amount" placeholder="Target amount" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Patient Password</label>
+                    <input type="password" name="password" placeholder="Dashboard password" required>
+                </div>
+                
+                <button type="submit" class="btn-submit">Register Patient & Start Funding 🩺</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

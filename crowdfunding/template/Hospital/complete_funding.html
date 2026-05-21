@@ -1,0 +1,137 @@
+{% extends 'Hospital/pageheader.html' %}
+{% block content %}
+
+<style>
+.glass-container {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    margin: 40px auto;
+    max-width: 950px;
+    color: #fff;
+}
+
+.glass-container h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.premium-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.premium-table thead tr {
+    background: linear-gradient(90deg, rgba(32,201,151,0.4), rgba(0,114,255,0.4));
+}
+
+.premium-table th {
+    padding: 14px 18px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.premium-table td {
+    padding: 13px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+}
+
+.premium-table tbody tr:hover {
+    background: rgba(255,255,255,0.08);
+    transition: background 0.25s;
+}
+
+.btn-complete {
+    background: linear-gradient(45deg, #20c997, #0072ff);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-complete:hover {
+    transform: scale(1.06);
+    box-shadow: 0 4px 14px rgba(32,201,151,0.5);
+    color: #fff;
+    text-decoration: none;
+}
+
+.badge-complete {
+    background: rgba(32,201,151,0.2);
+    color: #20c997;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+}
+</style>
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="glass-container">
+        <h2>✅ Completed Funding</h2>
+
+        <table class="premium-table">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Patient Name</th>
+                    <th>Required Amount</th>
+                    <th>Collected Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td>{{ row.1 }}</td>
+                    <td>₹ {{ row.2 }}</td>
+                    <td><span class="badge-complete">₹ {{ row.3 }}</span></td>
+                    <td>
+                        <a href="/complete_funding/{{ row.0 }}" class="btn-complete">🎉 Mark Completed</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="empty-state">No patients have reached their funding goal yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

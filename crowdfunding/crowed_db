@@ -1,0 +1,205 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.2.3-falcon-alpha-community-nt
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema crowd_funding
+--
+
+CREATE DATABASE IF NOT EXISTS crowd_funding;
+USE crowd_funding;
+
+--
+-- Definition of table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category` (
+  `idcategory` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`idcategory`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+
+
+--
+-- Definition of table `collected_amount`
+--
+
+DROP TABLE IF EXISTS `collected_amount`;
+CREATE TABLE `collected_amount` (
+  `idcollected_amount` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `credited_date` varchar(45) NOT NULL,
+  `iduser_fund_request` varchar(45) NOT NULL,
+  `donated_user_id` varchar(45) NOT NULL,
+  `amount` varchar(45) NOT NULL,
+  PRIMARY KEY (`idcollected_amount`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `collected_amount`
+--
+
+/*!40000 ALTER TABLE `collected_amount` DISABLE KEYS */;
+/*!40000 ALTER TABLE `collected_amount` ENABLE KEYS */;
+
+
+--
+-- Definition of table `complaint`
+--
+
+DROP TABLE IF EXISTS `complaint`;
+CREATE TABLE `complaint` (
+  `idcomplaint` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(45) NOT NULL,
+  `title` varchar(45) NOT NULL,
+  `complaint_date` varchar(45) NOT NULL,
+  `reply` varchar(45) NOT NULL,
+  `decsription` varchar(45) NOT NULL,
+  `iduser_fund_request` varchar(45) NOT NULL,
+  PRIMARY KEY (`idcomplaint`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `complaint`
+--
+
+/*!40000 ALTER TABLE `complaint` DISABLE KEYS */;
+/*!40000 ALTER TABLE `complaint` ENABLE KEYS */;
+
+
+--
+-- Definition of table `district`
+--
+
+DROP TABLE IF EXISTS `district`;
+CREATE TABLE `district` (
+  `iddistrict` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`iddistrict`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `district`
+--
+
+/*!40000 ALTER TABLE `district` DISABLE KEYS */;
+/*!40000 ALTER TABLE `district` ENABLE KEYS */;
+
+
+--
+-- Definition of table `login`
+--
+
+DROP TABLE IF EXISTS `login`;
+CREATE TABLE `login` (
+  `admin_id` varchar(20) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`admin_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `login`
+--
+
+/*!40000 ALTER TABLE `login` DISABLE KEYS */;
+/*!40000 ALTER TABLE `login` ENABLE KEYS */;
+
+
+--
+-- Definition of table `requirements`
+--
+
+DROP TABLE IF EXISTS `requirements`;
+CREATE TABLE `requirements` (
+  `idrequirements` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `bank_name` varchar(45) NOT NULL,
+  `ifsc_number` varchar(45) NOT NULL,
+  `status` varchar(45) NOT NULL,
+  PRIMARY KEY (`idrequirements`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `requirements`
+--
+
+/*!40000 ALTER TABLE `requirements` DISABLE KEYS */;
+/*!40000 ALTER TABLE `requirements` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user_fund_request`
+--
+
+DROP TABLE IF EXISTS `user_fund_request`;
+CREATE TABLE `user_fund_request` (
+  `iduser_fund_request` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idrequirements` varchar(45) NOT NULL,
+  `date_of_request` varchar(45) NOT NULL,
+  `category_id` int(10) unsigned NOT NULL,
+  `title` varchar(45) NOT NULL,
+  `description` varchar(1045) NOT NULL,
+  `status` varchar(45) NOT NULL,
+  `approved_date` varchar(45) NOT NULL,
+  PRIMARY KEY (`iduser_fund_request`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_fund_request`
+--
+
+/*!40000 ALTER TABLE `user_fund_request` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_fund_request` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user_register`
+--
+
+DROP TABLE IF EXISTS `user_register`;
+CREATE TABLE `user_register` (
+  `user_id` varchar(20) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `mobile` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user_register`
+--
+
+/*!40000 ALTER TABLE `user_register` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_register` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,0 +1,187 @@
+{% extends 'donor/pageheader.html' %}
+{% block content %}
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+.dash-wrapper {
+    padding: 20px 0 40px;
+    font-family: 'Inter', sans-serif;
+}
+
+.dash-title {
+    text-align: center;
+    color: #1e293b;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.dash-subtitle {
+    text-align: center;
+    color: #64748b;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+/* Hero Info Box */
+.hero-box {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 30px 40px;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: #334155;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.hero-box p {
+    font-size: 16px;
+    color: #475569;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Stats Row */
+.stats-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    padding: 25px 20px;
+    color: #1e293b;
+    flex: 1;
+    min-width: 200px;
+    max-width: 260px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card .icon { font-size: 32px; margin-bottom: 8px; display: block; }
+.stat-card .value { font-size: 28px; font-weight: 800; margin-bottom: 4px; color: #1e1b4b; }
+.stat-card .label { font-size: 12px; color: #64748b; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+
+.stat-card.pink   { border-top: 4px solid #ec4899; }
+.stat-card.blue   { border-top: 4px solid #3b82f6; }
+.stat-card.amber  { border-top: 4px solid #f59e0b; }
+
+/* Quick Actions */
+.quick-actions-title {
+    text-align: left;
+    color: #1e293b;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 0 0 50px;
+}
+
+.action-btn {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 25px 20px;
+    color: #1e293b;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background: #fdf2f8; /* Very light pink */
+    border-color: #ec4899;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(236, 72, 153, 0.1);
+    color: #be185d;
+    text-decoration: none;
+}
+
+.action-btn .a-icon { font-size: 32px; margin-bottom: 12px; display: block; }
+.action-btn .a-label { font-size: 16px; font-weight: 700; color: #334155; }
+.action-btn .a-desc { font-size: 14px; color: #64748b; margin-top: 6px; }
+</style>
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="dash-wrapper">
+
+        <h2 class="dash-title">❤️ Donor Portal</h2>
+        <p class="dash-subtitle">Help patients in need — every donation makes a difference</p>
+
+        <div class="hero-box">
+            <p>Welcome to the Crowdfunding Donor Portal. Browse hospitals, find patients in need, and donate to make a life-changing impact. Your generosity directly funds medical care for those who cannot afford it.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-card pink">
+                <span class="icon">🏥</span>
+                <div class="value">—</div>
+                <div class="label">Hospitals</div>
+            </div>
+            <div class="stat-card blue">
+                <span class="icon">🩺</span>
+                <div class="value">—</div>
+                <div class="label">Patients</div>
+            </div>
+            <div class="stat-card amber">
+                <span class="icon">💝</span>
+                <div class="value">—</div>
+                <div class="label">Campaigns</div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions-title">Start Donating</div>
+        <div class="actions-grid">
+
+            <a href="/view_hospitals" class="action-btn">
+                <span class="a-icon">🏥</span>
+                <div class="a-label">View Hospitals</div>
+                <div class="a-desc">Browse approved hospitals</div>
+            </a>
+
+            <a href="/donor_view_requests" class="action-btn">
+                <span class="a-icon">📣</span>
+                <div class="a-label">Public Requests</div>
+                <div class="a-desc">View all open fund requests</div>
+            </a>
+
+            <a href="/logout" class="action-btn">
+                <span class="a-icon">🚪</span>
+                <div class="a-label">Logout</div>
+                <div class="a-desc">Sign out safely</div>
+            </a>
+
+        </div>
+
+    </div>
+  </main>
+</div>
+
+{% endblock %}

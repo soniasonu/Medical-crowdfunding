@@ -1,0 +1,126 @@
+{% extends "base_user.html" %}
+{% block title %}My Profile – User Dashboard{% endblock %}
+{% block page_heading %}<i class="fas fa-user-circle"></i> My Profile{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 20px auto;">
+  <div class="card-header">
+    <h3>Account Information</h3>
+  </div>
+  <form method="post" enctype="multipart/form-data" style="padding: 20px;">
+    {% csrf_token %}
+    
+    <!-- Profile Image Section -->
+    <div style="text-align: center; margin-bottom: 30px;">
+      <div style="position: relative; display: inline-block; margin-bottom: 12px;">
+        {% if user.user_image %}
+        <img src="{{ user.user_image }}" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        {% else %}
+        <div style="width: 110px; height: 110px; border-radius: 50%; background: #f8fafc; display: flex; align-items: center; justify-content: center; color: #cbd5e1; border: 4px solid #fff; font-size: 44px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        {% endif %}
+      </div>
+      <div style="margin-top: 10px;">
+        <label style="font-size: 13px; font-weight: 600; color: #64748b; display: block; margin-bottom: 6px;">Profile Avatar</label>
+        <input type="file" name="user_image" accept="image/*" style="font-size: 11px; color: #94a3b8; padding: 6px; border: 1px dashed #e2e8f0; border-radius: 6px; width: 100%; max-width: 200px; margin: 0 auto; cursor: pointer; display: block;">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" name="name" value="{{ user.name }}" required>
+    </div>
+    <div class="form-group" style="margin-top: 15px;">
+      <label>User ID (Cannot be changed)</label>
+      <input type="text" value="{{ user.user_id }}" disabled style="background: #f8fafc; color: #64748b;">
+    </div>
+    <div class="form-group" style="margin-top: 15px;">
+      <label>Email Address</label>
+      <input type="email" name="email" value="{{ user.email }}" required>
+    </div>
+    <div class="form-group" style="margin-top: 15px;">
+      <label>Phone Number</label>
+      <input type="text" name="phone" value="{{ user.phone }}" required>
+    </div>
+    <div class="form-group" style="margin-top: 15px;">
+      <label>Address</label>
+      <textarea name="address" rows="3" required>{{ user.address }}</textarea>
+    </div>
+    <!-- Change Password Section -->
+    <div style="margin-top: 24px; border-top: 1px solid #f1f5f9; padding-top: 24px;">
+      <button type="button" class="btn btn-outline" onclick="togglePasswordSection()" id="pwdBtn" style="width: 100%; justify-content: center; background: #f8fafc; border: 1px dashed #cbd5e1; font-size: 13px; color: #64748b;">
+        <i class="fas fa-lock" style="margin-right: 8px;"></i> Change Security Password
+      </button>
+      
+      <div id="passwordSection" style="display: none; margin-top: 20px; animation: slideDown 0.3s ease-out;">
+        <style>
+          .pwd-container { position: relative; margin-bottom: 16px; }
+          .pwd-toggle { position: absolute; right: 12px; top: 38px; cursor: pointer; color: #94a3b8; font-size: 14px; transition: color 0.2s; }
+          .pwd-toggle:hover { color: var(--accent); }
+          @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        </style>
+        
+        <div class="pwd-container">
+          <label style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">Current Password</label>
+          <input type="password" name="current_password" id="current_pwd" placeholder="Identity verification..." style="padding-right: 40px;">
+          <i class="fas fa-eye-slash pwd-toggle" onclick="toggleVisibility('current_pwd', this)"></i>
+        </div>
+        
+        <div class="pwd-container">
+          <label style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">New Secure Password</label>
+          <input type="password" name="new_password" id="new_pwd" placeholder="Enter new password" style="padding-right: 40px;">
+          <i class="fas fa-eye-slash pwd-toggle" onclick="toggleVisibility('new_pwd', this)"></i>
+        </div>
+        
+        <div class="pwd-container">
+          <label style="font-size: 12px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">Confirm New Password</label>
+          <input type="password" name="confirm_password" id="confirm_pwd" placeholder="Repeat for safety" style="padding-right: 40px;">
+          <i class="fas fa-eye-slash pwd-toggle" onclick="toggleVisibility('confirm_pwd', this)"></i>
+        </div>
+        
+        <p id="pwdError" style="color: #ef4444; font-size: 11px; margin-top: -8px; margin-bottom: 12px; display: none; font-weight: 500;"></p>
+      </div>
+    </div>
+
+    <script>
+      function togglePasswordSection() {
+        const section = document.getElementById('passwordSection');
+        const btn = document.getElementById('pwdBtn');
+        if (section.style.display === 'none') {
+          section.style.display = 'block';
+          btn.innerHTML = '<i class="fas fa-times"></i> Cancel Password Change';
+          btn.style.borderColor = '#fca5a5';
+          btn.style.color = '#ef4444';
+        } else {
+          section.style.display = 'none';
+          btn.innerHTML = '<i class="fas fa-lock"></i> Change Security Password';
+          btn.style.borderColor = '#cbd5e1';
+          btn.style.color = '#64748b';
+          // Clear inputs
+          document.getElementById('current_pwd').value = '';
+          document.getElementById('new_pwd').value = '';
+          document.getElementById('confirm_pwd').value = '';
+        }
+      }
+
+      function toggleVisibility(id, icon) {
+        const input = document.getElementById(id);
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.classList.remove('fa-eye-slash');
+          icon.classList.add('fa-eye');
+        } else {
+          input.type = 'password';
+          icon.classList.remove('fa-eye');
+          icon.classList.add('fa-eye-slash');
+        }
+      }
+    </script>
+    
+    <div style="margin-top: 25px; display: flex; gap: 10px;">
+      <button type="submit" class="btn btn-primary" style="flex: 1;"><i class="fas fa-save"></i> Save Changes</button>
+      <a href="{% url 'dashboard' %}" class="btn" style="flex: 1; text-align: center; border: 1px solid #e2e8f0; color: #64748b;">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base_admin.html" %}
+{% block title %}Manage Agencies – Admin Dashboard{% endblock %}
+{% block page_heading %}<i class="fas fa-building"></i> Agency Management{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h3><i class="fas fa-clock"></i> Pending Approval</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Profile</th><th>Agency ID</th><th>Name</th><th>Category</th><th>Phone</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for a in agencies_pending %}
+        <tr>
+          <td>
+            {% if a.agency_image %}
+            <img src="{{ a.agency_image }}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid #e2e8f0;">
+            {% else %}
+            <div style="width:40px; height:40px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-building"></i></div>
+            {% endif %}
+          </td>
+          <td>{{ a.agency_id }}</td>
+          <td>{{ a.name }}</td>
+          <td>{{ a.category_id }}</td>
+          <td>{{ a.phone }}</td>
+          <td>
+            <a href="{% url 'admin_agency_approve' a.agency_id %}" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Approve</a>
+            <a href="{% url 'admin_agency_reject' a.agency_id %}" class="btn btn-danger btn-sm" style="margin-left:6px;"><i class="fas fa-times"></i> Reject</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="td-empty"><i class="fas fa-check-circle"></i> No pending agencies.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" style="margin-top:28px;">
+  <div class="card-header">
+    <h3><i class="fas fa-check-circle"></i> Approved Agencies</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Profile</th><th>Name</th><th>Phone</th><th>Email</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody>
+        {% for a in agencies_approved %}
+        <tr>
+          <td>
+            {% if a.agency_image %}
+            <img src="{{ a.agency_image }}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid #e2e8f0;">
+            {% else %}
+            <div style="width:40px; height:40px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-building"></i></div>
+            {% endif %}
+          </td>
+          <td>{{ a.name }}</td>
+          <td>{{ a.phone }}</td>
+          <td>{{ a.email }}</td>
+          <td><span class="badge approved"><i class="fas fa-check"></i> Approved</span></td>
+          <td>
+            <a href="{% url 'admin_agency_block' a.agency_id %}" class="btn btn-danger btn-sm" onclick="return confirm('Block this agency?')"><i class="fas fa-ban"></i> Block</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="td-empty">No approved agencies yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" style="margin-top:28px;">
+  <div class="card-header">
+    <h3><i class="fas fa-ban"></i> Blocked Agencies</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Profile</th><th>Name</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for a in agencies_blocked %}
+        <tr>
+          <td>
+            {% if a.agency_image %}
+            <img src="{{ a.agency_image }}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid #e2e8f0;">
+            {% else %}
+            <div style="width:40px; height:40px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-building"></i></div>
+            {% endif %}
+          </td>
+          <td>{{ a.name }}</td>
+          <td>{{ a.phone }}</td>
+          <td><span class="badge rejected"><i class="fas fa-ban"></i> Blocked</span></td>
+          <td>
+            <a href="{% url 'admin_agency_approve' a.agency_id %}" class="btn btn-success btn-sm"><i class="fas fa-undo"></i> Unblock</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="td-empty">No blocked agencies.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

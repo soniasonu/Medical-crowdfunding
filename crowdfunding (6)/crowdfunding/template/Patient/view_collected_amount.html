@@ -1,0 +1,46 @@
+{% extends "Patient/PatientHeader.html" %}
+{% block content %}
+
+<div class="wrapper row3" style="background: transparent;">
+  <main class="hoc container clear"> 
+    
+    <div style="background: linear-gradient(135deg, #4CAF50, #8BC34A); color: white; padding: 40px 30px; border-radius: 15px; text-align: center; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);">
+        <h2 style="margin: 0 0 10px 0; font-size: 24px; font-weight: normal;">Total Funds Raised</h2>
+        <div style="font-size: 54px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
+            ₹{{ collected }}
+        </div>
+        <p style="margin: 15px 0 0 0; opacity: 0.9;">Thank you to all our generous contributors!</p>
+    </div>
+
+    <div style="background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <h3 style="color: #333; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Recent Donations</h3>
+
+        <div class="scrollable">
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                {% for i in data %}
+                <li style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #f0f0f0; transition: transform 0.2s;" onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
+                    <div style="display: flex; align-items: center;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: #e3f2fd; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                            <i class="fas fa-heart" style="color: #F44336; font-size: 20px;"></i>
+                        </div>
+                        <div>
+                            <strong style="color: #333; font-size: 16px; display: block;">{{ i.0 }}</strong>
+                            <small style="color: #888;"><i class="far fa-clock"></i> {{ i.2 }}</small>
+                        </div>
+                    </div>
+                    <div style="font-size: 20px; font-weight: bold; color: #4CAF50;">
+                        +₹{{ i.1 }}
+                    </div>
+                </li>
+                {% empty %}
+                <li style="text-align: center; padding: 30px; color: #888;">
+                    No donations recorded yet.
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'Admin/PageHeader.html' %}
+{% block content %}
+<div class="wrapper row3" style="background: transparent;">
+  <main class="hoc container clear"> 
+    <div class="table-wrapper">
+        <h2 style="color: #333; margin-bottom: 20px;">Completed Funding</h2>
+        <table class="premium-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Request Date</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Required Amount</th>
+                    <th style="text-align: center;" colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in data %}
+                <tr>
+                    <td>{{ row.12 }}</td>
+                    <td>{{ row.13 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.4 }}</td>
+                    <td>{{ row.5 }}</td>
+                    <td><strong style="color: #4CAF50;">₹ {{ row.10 }}</strong></td>
+                    <td style="text-align: center; border-right: none;">
+                        <a href="/resume_fund/{{ row.0 }}" class="btn-sm btn-edit">Resume</a>
+                    </td>
+                    <td style="text-align: center; border-left: none;">
+                        <a href="/get_amount_details/{{ row.0 }}" class="btn-sm btn-neutral">View More</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </main>
+</div>
+{% endblock %}

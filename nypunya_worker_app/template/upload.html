@@ -1,0 +1,129 @@
+pip install tensorflow==2.15 keras==3.x{% include 'user/user_navbar.html' %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Prediction</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            min-height: 100vh;
+        }
+
+        .main-container {
+            padding-top: 100px; /* space for navbar */
+        }
+
+        .card-box {
+            max-width: 450px;
+            margin: auto;
+            border-radius: 15px;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .btn-custom {
+            width: 100%;
+            border-radius: 25px;
+            font-size: 18px;
+        }
+
+        .preview-img {
+            margin-top: 15px;
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f1f1f1;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container main-container">
+    <div class="card-box">
+        <h3 class="mb-3">Upload Image</h3>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <input type="file" name="image" class="form-control" id="imageInput" required>
+
+            <img id="preview" class="preview-img"/>
+
+            <button type="submit" class="btn btn-primary btn-custom mt-3">Predict</button>
+        </form>
+
+        <div id="resultBox" class="result-box">
+    <h5>Prediction Result:</h5>
+    <p id="resultText"></p>
+
+
+    <a href="next_page" id="proceedBtn" class="btn btn-success mt-2" style="display:none;">
+        Proceed
+    </a>
+</div>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('uploadForm');
+    const preview = document.getElementById('preview');
+    const input = document.getElementById('imageInput');
+    const resultBox = document.getElementById('resultBox');
+    const resultText = document.getElementById('resultText');
+
+    input.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            preview.style.display = "block";
+            preview.src = URL.createObjectURL(file);
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch('/predict', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+    resultBox.style.display = "block";
+    resultText.innerHTML = "<strong>" + data.prediction + "</strong>";
+
+    const proceedBtn = document.getElementById('proceedBtn');
+    proceedBtn.style.display = "block";
+    proceedBtn.href = "/next_page?result=" + encodeURIComponent(data.prediction);
+})
+        .catch(error => {
+            resultBox.style.display = "block";
+            resultText.innerHTML = "Error occurred!";
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+{% extends "base_agency.html" %}
+{% block title %}Agency Dashboard – Nypunya Worker{% endblock %}
+{% block page_heading %}Agency Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>Overview</h2>
+  <p>Quick summary of your agency activities</p>
+</div>
+
+<!-- Stats -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon amber"><i class="fas fa-user-clock"></i></div>
+    <span class="value">{{ workers_pending|length }}</span>
+    <span class="label">Pending Workers</span>
+    <div class="stat-accent-bar" style="background:linear-gradient(90deg,#d97706,#b45309)"></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon green"><i class="fas fa-user-check"></i></div>
+    <span class="value">{{ workers_approved|length }}</span>
+    <span class="label">Approved Workers</span>
+    <div class="stat-accent-bar" style="background:linear-gradient(90deg,#059669,#047857)"></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon blue"><i class="fas fa-hand-holding-dollar"></i></div>
+    <span class="value">₹{{ total_quoted }}</span>
+    <span class="label">Total Quoted Value</span>
+    <div class="stat-accent-bar" style="background:linear-gradient(90deg,#2563eb,#1d4ed8)"></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon cyan"><i class="fas fa-clipboard-check"></i></div>
+    <span class="value">{{ confirmed_count }}</span>
+    <span class="label">Confirmed Jobs</span>
+    <div class="stat-accent-bar" style="background:linear-gradient(90deg,#0891b2,#0e7490)"></div>
+  </div>
+</div>
+
+<div class="grid grid-cols-2 gap-20" style="margin-top:30px;">
+  <div class="card">
+    <div class="card-header"><h3><i class="fas fa-users"></i> Worker Management</h3></div>
+    <p style="padding:0 20px; color:#64748b;">You have {{ workers_pending|length }} pending applications to review.</p>
+    <div style="padding:20px;">
+      <a href="{% url 'agency_view_workers' %}" class="btn btn-primary w-full" style="justify-content:center;">View all workers</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3><i class="fas fa-briefcase"></i> Job Management</h3></div>
+    <p style="padding:0 20px; color:#64748b;">You have {{ job_requests|length }} incoming job requests in the system.</p>
+    <div style="padding:20px;">
+      <a href="{% url 'agency_view_jobs' %}" class="btn btn-success w-full" style="justify-content:center;">Manage job requests</a>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:30px;">
+  <div class="card-header"><h3><i class="fas fa-tags"></i> Propose New Category</h3></div>
+  <div style="padding:20px;">
+    <p style="color:#64748b; margin-bottom:16px;">Can't find a category? Propose a new one for admin approval.</p>
+    <form method="post" action="{% url 'agency_add_category' %}" class="inline-form" style="max-width:400px;">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="New Category Name" required style="flex:1;">
+      <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit</button>
+    </form>
+  </div>
+</div>
+
+<div class="card" style="margin-top:30px;">
+  <div class="card-header"><h3><i class="fas fa-history"></i> Recent Activity</h3></div>
+  <div style="padding:20px;">
+    <p style="color:#64748b; margin-bottom:16px;">Check your historical assignments and tracking details.</p>
+    <a href="{% url 'agency_view_assignments' %}" class="btn btn-info"><i class="fas fa-list-check"></i> View Assignment History</a>
+  </div>
+</div>
+{% endblock %}
+

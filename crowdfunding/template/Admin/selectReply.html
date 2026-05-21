@@ -1,0 +1,18 @@
+{% extends 'Admin/PageHeader.html' %}
+{% block content %}
+<div class="wrapper row3" style="background: transparent;">
+  <main class="hoc container clear"> 
+    <div class="view-container">
+        <h2>Admin Reply</h2>
+        <form name="form1" method="post" action="">
+            {% csrf_token %}
+            <div style="margin-bottom: 20px;">
+                <label for="TxtReply" style="display: block; margin-bottom: 8px; font-weight: 600;">Enter Reply Message</label>
+                <textarea id="TxtReply" name="TxtReply" rows="4" placeholder="Type your response here..." required></textarea>
+            </div>
+            <button type="submit">Submit Reply</button>
+        </form>
+    </div>
+  </main>
+</div>
+{% endblock %}

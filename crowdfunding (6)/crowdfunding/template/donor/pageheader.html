@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CrowdFunding — Donor</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/static/Admin/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f8fafc;
+    min-height: 100vh;
+    color: #1e293b;
+    margin: 0;
+  }
+  .cf-topbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #475569;
+  }
+  .cf-navbar {
+    background: #ec4899;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 70px;
+  }
+  .cf-logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+  .cf-logo span {
+    color: rgba(255,255,255,0.8);
+  }
+  .cf-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .cf-nav > li { position: relative; }
+  .cf-nav > li > a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  .cf-nav > li > a:hover {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+  }
+  .cf-nav li:hover > .cf-dropdown { display: block; }
+  .cf-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    z-index: 200;
+  }
+  .cf-dropdown a {
+    display: block;
+    padding: 10px 16px;
+    color: #334155;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  .cf-dropdown a:hover {
+    background: #f1f5f9;
+    color: #ec4899;
+  }
+  .btn-logout {
+    background: #ef4444 !important;
+    color: #fff !important;
+    padding: 9px 18px !important;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+    margin-left: 10px;
+    border: none !important;
+  }
+  .btn-logout:hover {
+    background: #dc2626 !important;
+  }
+  .page-content {
+    min-height: calc(100vh - 120px);
+  }
+</style>
+</head>
+<body>
+
+<div class="cf-topbar">
+  <div><span>📞 +00 (123) 456 7890</span><span style="margin-left:18px">✉️ info@crowdapp.com</span></div>
+  <div>❤️ Donor Portal</div>
+</div>
+
+<nav class="cf-navbar">
+  <a href="/DonorHome/" class="cf-logo">CROWD<span>FUNDING</span></a>
+
+  <ul class="cf-nav">
+    <li><a href="/DonorHome/">🏠 Home</a></li>
+
+    <li>
+      <a href="#">🏥 Donate ▾</a>
+      <ul class="cf-dropdown">
+        <a href="/view_hospitals">🏥 View Hospitals</a>
+        <a href="/donor_view_requests">📣 Public Fund Requests</a>
+
+      </ul>
+    </li>
+
+    <li><a href="/logout" class="btn-logout">🚪 Logout</a></li>
+  </ul>
+</nav>
+
+<div class="page-content">
+{% block content %}
+{% endblock %}
+</div>
+
+</body>
+</html>

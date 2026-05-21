@@ -1,0 +1,11 @@
+{% extends "base_dashboard.html" %}
+
+{% block sidebar %}
+<span class="nav-section-label">Navigation</span>
+<a href="{% url 'dashboard' %}" class="nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i class="fas fa-house"></i> Overview</a>
+<a href="{% url 'worker_profile' %}" class="nav-item {% if request.resolver_match.url_name == 'worker_profile' %}active{% endif %}"><i class="fas fa-user-circle"></i> My Profile</a>
+<a href="{% url 'worker_view_categories' %}" class="nav-item {% if request.resolver_match.url_name == 'worker_view_categories' %}active{% endif %}"><i class="fas fa-tags"></i> My Categories</a>
+<a href="{% url 'worker_view_assignments' %}" class="nav-item {% if request.resolver_match.url_name == 'worker_view_assignments' %}active{% endif %}"><i class="fas fa-clipboard-list"></i> Assigned Work</a>
+<a href="{% url 'worker_view_payments' %}" class="nav-item {% if request.resolver_match.url_name == 'worker_view_payments' %}active{% endif %}"><i class="fas fa-wallet"></i> My Earnings</a>
+<a href="{% url 'worker_view_training' %}" class="nav-item {% if request.resolver_match.url_name == 'worker_view_training' %}active{% endif %}"><i class="fas fa-video"></i> Training</a>
+{% endblock %}

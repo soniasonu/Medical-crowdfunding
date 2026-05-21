@@ -1,0 +1,138 @@
+{% extends "Patient/PatientHeader.html" %}
+{% block content %}
+
+<style>
+    .dashboard-container {
+        margin: 50px auto;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(15px);
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        max-width: 1000px;
+    }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
+    .stat-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,240,240,0.9));
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border: 1px solid rgba(255,255,255,0.5);
+        transition: transform 0.3s ease;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+    .stat-card i {
+        font-size: 40px;
+        margin-bottom: 15px;
+        color: #4CAF50;
+    }
+    .stat-card h3 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+        color: #555;
+    }
+    .stat-card .amount {
+        font-size: 32px;
+        font-weight: bold;
+        color: #222;
+        margin: 0;
+    }
+    .progress-wrapper {
+        margin-top: 40px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+    }
+    .progress-bar-container {
+        width: 100%;
+        height: 20px;
+        background: #eee;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 15px 0;
+    }
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #4CAF50, #8BC34A);
+        /* Calculate percentage */
+        width: {% if needed > 0 %}{% widthratio collected needed 100 %}{% else %}0{% endif %}%;
+        border-radius: 10px;
+        transition: width 1s ease-in-out;
+    }
+</style>
+
+<div class="wrapper row3" style="background: transparent;">
+  <main class="hoc container clear"> 
+    <div class="dashboard-container">
+        
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h2 style="color: #333; font-size: 32px; font-weight: bold;">Welcome to Your Dashboard</h2>
+            <p style="color: #666;">Track your funding progress and connect with donors.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-bullseye" style="color: #2196F3;"></i>
+                <h3>Target Goal</h3>
+                <p class="amount">₹{{ needed }}</p>
+            </div>
+            
+            <div class="stat-card">
+                <i class="fas fa-hand-holding-heart" style="color: #4CAF50;"></i>
+                <h3>Total Raised</h3>
+                <p class="amount">₹{{ collected }}</p>
+            </div>
+            
+            <div class="stat-card">
+                <i class="fas fa-hourglass-half" style="color: #FF9800;"></i>
+                <h3>Amount Remaining</h3>
+                <p class="amount">₹{{ remaining }}</p>
+            </div>
+        </div>
+
+        <div class="progress-wrapper">
+            <h3 style="margin: 0 0 10px 0;">Funding Progress</h3>
+            <div class="progress-bar-container">
+                <div class="progress-fill" style="width: {% if needed > 0 %}{% widthratio collected needed 100 %}{% else %}0{% endif %}%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; color: #666; font-size: 14px;">
+
+                <span>₹0</span>
+                <span>{% if needed > 0 %}{% widthratio collected needed 100 %}{% else %}0{% endif %}% Funded</span>
+                <span>₹{{ needed }}</span>
+            </div>
+        </div>
+
+        </div>
+
+        <div style="margin-top: 50px;">
+            <h3 style="margin-bottom: 24px; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; font-weight: 700;">Quick Actions</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <a href="/patient_view_donors" style="background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-decoration: none; text-align: center; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="font-size: 24px; margin-bottom: 8px;">❤️</div>
+                    <div style="font-weight: 700; color: #334155;">My Donors</div>
+                </a>
+                <a href="/patient_view_collected" style="background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-decoration: none; text-align: center; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="font-size: 24px; margin-bottom: 8px;">📊</div>
+                    <div style="font-weight: 700; color: #334155;">Fund Status</div>
+                </a>
+                <a href="/patient_view_feedback" style="background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-decoration: none; text-align: center; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="font-size: 24px; margin-bottom: 8px;">💬</div>
+                    <div style="font-weight: 700; color: #334155;">Support Chat</div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+  </main>
+</div>
+
+{% endblock %}

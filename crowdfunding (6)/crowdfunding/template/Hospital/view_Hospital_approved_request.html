@@ -1,0 +1,63 @@
+{% extends 'Hospital/pageheader.html' %}
+{% block content %}
+<head>
+    <style>
+        #cs {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #cs td, #cs th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #cs tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #cs tr:hover {
+                background-color: #ddd;
+            }
+
+            #cs th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+            }
+    </style>
+</head>
+
+
+<p>&nbsp;</p>
+<h2>Waiting List</h2>
+<table id="cs">
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Requirement</th>
+        <th>Details</th>
+        <th>Required Amount</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+  {% for row in data %}
+  <tr>
+      <td><div align="center">{{ row.12 }}</div></td>
+      <td><div align="center">{{ row.13 }}</div></td>
+      <td><div align="center">{{ row.17 }}</div></td>
+      <td><div align="center">{{ row.4 }}</div></td>
+      <td><div align="center">{{ row.5 }}</div></td>
+      <td><div align="center">{{ row.10 }}</div></td>
+      <td><div align="center">{{ row.6 }}</div></td>
+      <td>
+          <div align="center">
+              <a href="/delete_requirementH/{{ row.0 }}" class="btn-sm" style="background: #dc2626; color: #fff !important;" onclick="return confirm('Are you sure?')">🗑 Delete</a>
+          </div>
+      </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
