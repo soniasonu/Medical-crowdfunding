@@ -24,16 +24,24 @@ HelpHub is a web-based medical crowdfunding platform that connects hospitals and
 - **Database:** MySQL Server
 
 ## Screenshots
-![Home Page](https://github.com/user-attachments/assets/14a2b613-e8d8-4b2f-b5a4-eb4a22ce30d5)
-![Login](https://github.com/user-attachments/assets/5e396c57-7883-41ba-bd88-688b1aee27f5)
-![Admin dashboard](https://github.com/user-attachments/assets/ab77f50f-c35d-4f13-939d-3579d7ecada9)
-![Patient Funding Approval](https://github.com/user-attachments/assets/0e2e0691-88fc-41ee-ac91-da0f857bf4e8)
-![Registered Donors](https://github.com/user-attachments/assets/8b12fc67-92a6-412e-b5e9-8c19798ca1a7)
-![Hospital dashboard](https://github.com/user-attachments/assets/ae37b9fa-60e5-43f9-b307-a6df66942887)
-![Patient Details](https://github.com/user-attachments/assets/0357dd1e-2d79-446f-b039-8b6632b566cd)
-![Donor Registration](https://github.com/user-attachments/assets/6b4f020c-017e-4d33-9b2e-ce4df3d73fc8)
-![Patient Portal Dashboard](https://github.com/user-attachments/assets/b26530ee-b6ef-4b3d-ae38-76a81f919a41)
-
+**Home Page**
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/d29fbd07-59a5-42b7-973e-59c59f33e575" />
+**Login**
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/15eaec22-6c59-47d1-a1a6-2718d48f8ac7" />
+**Admin Dashboard**
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/eaeee670-b3c2-4273-823d-9abb2c7c6e61" />
+**Patient Funding Approval**
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/35aeeef5-adb1-4edb-afff-7f57d7e1e551" />
+**Registered Donors**
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/9077dfde-701b-491b-af7e-d96ae2addb13" />
+**Hospital Dashboard**
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/87a9f87f-7b7f-4063-8039-69619574277c" />
+**Patient Details**
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/4567526d-c1ee-4459-a52d-d3e6defdb8f5" />
+**Donor Registration**
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/b6518f12-efe4-4988-aa68-134817c7f9cc" />
+**Patient Portal Dashboard**
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/404b6c84-55e9-43c1-b467-14a6ee6c8117" />
 
 
 ## Future Improvements
