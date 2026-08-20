@@ -25,23 +25,40 @@ HelpHub is a web-based medical crowdfunding platform that connects hospitals and
 
 ## Screenshots
 **Home Page**
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/d29fbd07-59a5-42b7-973e-59c59f33e575" />
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/d29fbd07-59a5-42b7-973e-59c59f33e575" />
+
 **Login**
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/15eaec22-6c59-47d1-a1a6-2718d48f8ac7" />
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/15eaec22-6c59-47d1-a1a6-2718d48f8ac7" />
+
 **Admin Dashboard**
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/eaeee670-b3c2-4273-823d-9abb2c7c6e61" />
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/eaeee670-b3c2-4273-823d-9abb2c7c6e61" />
+
 **Patient Funding Approval**
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/35aeeef5-adb1-4edb-afff-7f57d7e1e551" />
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/35aeeef5-adb1-4edb-afff-7f57d7e1e551" />
+
 **Registered Donors**
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/9077dfde-701b-491b-af7e-d96ae2addb13" />
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/9077dfde-701b-491b-af7e-d96ae2addb13" />
+
 **Hospital Dashboard**
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/87a9f87f-7b7f-4063-8039-69619574277c" />
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/87a9f87f-7b7f-4063-8039-69619574277c" />
+
 **Patient Details**
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/4567526d-c1ee-4459-a52d-d3e6defdb8f5" />
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/4567526d-c1ee-4459-a52d-d3e6defdb8f5" />
+
 **Donor Registration**
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/b6518f12-efe4-4988-aa68-134817c7f9cc" />
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/b6518f12-efe4-4988-aa68-134817c7f9cc" />
+
 **Patient Portal Dashboard**
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/404b6c84-55e9-43c1-b467-14a6ee6c8117" />
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/404b6c84-55e9-43c1-b467-14a6ee6c8117" />
 
 
 ## Future Improvements
