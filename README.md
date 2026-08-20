@@ -23,6 +23,19 @@ HelpHub is a web-based medical crowdfunding platform that connects hospitals and
 - **Backend:** Python, Django Framework
 - **Database:** MySQL Server
 
+## Screenshots
+![Home Page](https://github.com/user-attachments/assets/14a2b613-e8d8-4b2f-b5a4-eb4a22ce30d5)
+![Login](https://github.com/user-attachments/assets/5e396c57-7883-41ba-bd88-688b1aee27f5)
+![Admin dashboard](https://github.com/user-attachments/assets/ab77f50f-c35d-4f13-939d-3579d7ecada9)
+![Patient Funding Approval](https://github.com/user-attachments/assets/0e2e0691-88fc-41ee-ac91-da0f857bf4e8)
+![Registered Donors](https://github.com/user-attachments/assets/8b12fc67-92a6-412e-b5e9-8c19798ca1a7)
+![Hospital dashboard](https://github.com/user-attachments/assets/ae37b9fa-60e5-43f9-b307-a6df66942887)
+![Patient Details](https://github.com/user-attachments/assets/0357dd1e-2d79-446f-b039-8b6632b566cd)
+![Donor Registration](https://github.com/user-attachments/assets/6b4f020c-017e-4d33-9b2e-ce4df3d73fc8)
+![Patient Portal Dashboard](https://github.com/user-attachments/assets/b26530ee-b6ef-4b3d-ae38-76a81f919a41)
+
+
+
 ## Future Improvements
 
 - Mobile application (Android and iOS) for easier access
