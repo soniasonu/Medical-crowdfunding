@@ -1,6 +1,6 @@
 # HelpHub — Medical Crowdfunding Platform
 
-## Problem
+## Problem 
 
 Many patients are unable to afford medical treatment due to financial limitations. Existing fundraising options — social media, individual charity organizations, offline fundraising — are not centralized, lack proper monitoring, and have no structured way to verify patient requirements or track where donations actually go.
 
