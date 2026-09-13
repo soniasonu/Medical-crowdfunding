@@ -59,7 +59,7 @@ HelpHub is a web-based medical crowdfunding platform that connects hospitals and
 **Patient Portal Dashboard**
 
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/404b6c84-55e9-43c1-b467-14a6ee6c8117" />
-
+  
 
 ## Future Improvements
 
@@ -69,7 +69,7 @@ HelpHub is a web-based medical crowdfunding platform that connects hospitals and
 - Chatbot assistance — AI chatbot to guide users during donation
 - Subscription-based donations (monthly or yearly recurring)
 - Emergency case prioritization — auto-highlight urgent medical cases
-
+  
 ### How to Run
 pip install django
 python manage.py runserver
