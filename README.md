@@ -53,7 +53,7 @@ HelpHub is a web-based medical crowdfunding platform that connects hospitals and
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/4567526d-c1ee-4459-a52d-d3e6defdb8f5" />
 
 **Donor Registration**
-
+    
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/b6518f12-efe4-4988-aa68-134817c7f9cc" />
 
 **Patient Portal Dashboard**
