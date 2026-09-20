@@ -13,7 +13,7 @@ HelpHub is a web-based medical crowdfunding platform that connects hospitals and
 - **Hospital** — registers on the platform, registers patients with treatment details, forwards fund requests to Admin for approval, and tracks funded patients
 - **Public User (Donor)** — views active campaigns, donates, sends feedback, and tracks donation history
 
-**Key features:**
+**Key features:**  
 - Centralized, structured fund request flow: Hospital submits → Admin verifies and records → Donors give → Admin confirms and analyzes
 - Real-time donation tracking and a centralized database for campaigns and donations
 
