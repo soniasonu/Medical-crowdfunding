@@ -19,7 +19,7 @@ HelpHub is a web-based medical crowdfunding platform that connects hospitals and
 
 ## Tech Stack
 
-- **Frontend:** HTML, CSS, JavaScript
+- **Frontend:** HTML, CSS, JavaScript                 
 - **Backend:** Python, Django Framework
 - **Database:** MySQL Server
 
