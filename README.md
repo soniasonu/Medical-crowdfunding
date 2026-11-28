@@ -24,7 +24,7 @@ HelpHub is a web-based medical crowdfunding platform that connects hospitals and
 - **Database:** MySQL Server
 
 ## Screenshots
-**Home Page**
+**Home Page**                
 
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/d29fbd07-59a5-42b7-973e-59c59f33e575" />
 
